@@ -7,7 +7,12 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  options = ["Test1", "Test2", "Test3", "Test4", "Test5", "Test6", "Test7"];
+  options = ["../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
+             "../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
+             "../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
+             "../../assets/franklin-flag.png"];
+  images = [null, null, null, null, null, null, null];
+
   width;
   height;
   offset;
@@ -49,10 +54,14 @@ export class SpinnerComponent implements OnInit {
     this.sector(this.ctx, this.r-5, this.r-5,
       this.offset + i * this.arc, this.offset + (i + 1) * this.arc);
     let angle = this.offset + (i + 1/2) * this.arc;
-    let x = this.width/2 + 164 * Math.cos(angle)
-    let y = this.height/2 + 164 * Math.sin(angle);
+    let x = this.width/2 + 0.66 * this.r * Math.cos(angle)
+    let y = this.height/2 + 0.66 * this.r * Math.sin(angle);
     this.ctx.fillStyle = "red";
-    this.bubble(this.ctx, x, y, 55, 55);
+    this.bubble(this.ctx, x, y, 0.22 * this.r, 0.22 * this.r);
+    if (this.images[i]) {
+      this.ctx.drawImage(this.images[i], x - this.r * 0.22, y - this.r * 0.22,
+                                         this.r * 0.44, this.r * 0.44);
+    }
   }
 
   drawLoop() {
@@ -93,6 +102,19 @@ export class SpinnerComponent implements OnInit {
 
     for (let i = 0; i < this.options.length; i++) {
       this.colors.push('hsl(' + Math.floor(i / this.options.length * 360) + ', 100%, 70%)');
+    }
+
+    function imageSetter(array, i, img) {
+      return function() {
+        array[i] = img;
+        console.log(array);
+      }
+    }
+
+    for (let i = 0; i < this.options.length; i++) {
+      var img = new Image();
+      img.onload = imageSetter(this.images, i, img);
+      img.src = this.options[i];
     }
 
     this.drawLoop();
