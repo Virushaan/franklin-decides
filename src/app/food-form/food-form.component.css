@@ -1,6 +1,6 @@
 .food-form {
   width: 600px;
-  margin: 0 auto;
+  margin: auto;
   background-color: #AAEEFF;
   padding: 0;
 }
@@ -13,7 +13,6 @@
 .form-input-fields {
   background-color: white;
 }
-
 
 mat-form-field {
   display: block;

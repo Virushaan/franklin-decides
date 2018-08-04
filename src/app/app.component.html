@@ -1,3 +1,2 @@
-<app-food-form></app-food-form>
-<br>
-<app-loading></app-loading>
+<app-food-form #div *ngIf="formUnsubmitted" (click)="test()"></app-food-form>
+<app-loading *ngIf="loading"></app-loading>

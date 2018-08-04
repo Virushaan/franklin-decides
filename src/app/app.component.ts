@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import {LocationServiceService} from './services/location-service.service'
 
 @Component({
@@ -8,7 +8,11 @@ import {LocationServiceService} from './services/location-service.service'
 })
 export class AppComponent  {
   title = 'app';
-
-
+  public loading = false;
+  public formUnsubmitted = true;
+  @ViewChild('div') div: ElementRef;
+  test() {
+    console.log(this.div)
+  }
 
 }
