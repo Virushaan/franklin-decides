@@ -1,3 +1,22 @@
 body {
 	margin: 0px;
 }
+
+.location-card {
+  margin-left: -35px;
+  width: 99%;
+  margin-bottom: -15px;
+}
+
+mat-card-content {
+  padding-top: 5px;
+}
+
+.die-light {
+  width:20px;
+  height: auto;
+}
+
+.die-button {
+  float: right;
+}
