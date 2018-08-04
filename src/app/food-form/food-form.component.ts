@@ -35,7 +35,6 @@ export class FoodFormComponent implements OnInit {
   }
 
   start() {
-    console.log('???');
     this.startEvent.emit();
   }
 

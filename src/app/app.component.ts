@@ -42,6 +42,10 @@ export class AppComponent implements OnInit{
     this.result[i] = this.fullResult[6]
   }
 
+  startWinHandler($event) {
+    console.log($event)
+  }
+
   async startEventHandler() {
     console.log("TEST")
     await this.locationService.findMe();

@@ -5,7 +5,7 @@
 	</app-food-form>
 	<app-loading class="loading-animation" *ngSwitchCase="'loading'"></app-loading>
 	<div *ngSwitchCase="'spinner'">
-		<app-spinner></app-spinner>
+		<app-spinner (winnerEvent)="startWinHandler($event)"></app-spinner>
 	</div>
 	<p *ngSwitchDefault>Ended up somewhere bad?</p>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-spinner',
@@ -11,6 +11,8 @@ export class SpinnerComponent implements OnInit {
             "../../assets/icon-fork.png", "../../assets/icon-chef.png",
             "../../assets/icon-mug.png", "../../assets/icon-bowl.png"];
   images = [null, null, null, null, null, null];
+
+  @Output() winnerEvent = new EventEmitter<number>();
 
   width;
   height;
@@ -184,6 +186,7 @@ export class SpinnerComponent implements OnInit {
       if (this.drawing) {
         this.winner = Math.floor(this.offset / this.arc);
         this.jumpno = 0;
+        this.winnerEvent.emit(this.winner);
       }
       if (this.winner >= 0) {
         let angle = this.arc * (this.winner + 1/2);
@@ -237,4 +240,5 @@ export class SpinnerComponent implements OnInit {
 
     this.drawLoop();
   }
+
 }
