@@ -15,6 +15,7 @@ import { FoodFormComponent } from './food-form/food-form.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     MatGridListModule,
     MatCheckboxModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

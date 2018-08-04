@@ -17,7 +17,6 @@ export class FoodFormComponent implements OnInit {
   constructor(private locationService:LocationServiceService) { }
 
   formSubmit() {
-    this.locationService.findMe();
     this.userName = 'loaded'
     this.nameEvent.emit(this.userName);
   }
