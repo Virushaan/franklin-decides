@@ -56,7 +56,16 @@ export class AppComponent implements OnInit{
     let mylocation = await this.locationService.getLocation();
     console.log('location:', mylocation);
     this.page = 'loading';
-
+    if (mylocation == null){
+      mylocation = {
+        coords: {
+          longitude: 151.1927716,
+          latitude: -33.8799206
+        }
+      }
+      console.log('Bad location')
+    }
+    console.log("###", mylocation);
     this.fullResult = await this.http.get<Array<any>>(`https://franklin-decides-api.herokuapp.com/get_location?longitude=${mylocation.coords.longitude}&latitude=${mylocation.coords.latitude}`).toPromise()
       .catch(err => {
         this.page='spinner';
