@@ -131,6 +131,10 @@ export class SpinnerComponent implements OnInit {
       if (this.franklin_happy) {
         let height = this.jumpno * (20 - this.jumpno) / 14;
         if (height < 0) {
+          if (height < -200) {
+            this.winnerEvent.emit(this.winner);
+            return;
+          }
           height = 0;
         }
         this.ctx.drawImage(this.franklin_happy,
@@ -186,7 +190,6 @@ export class SpinnerComponent implements OnInit {
       if (this.drawing) {
         this.winner = Math.floor(this.offset / this.arc);
         this.jumpno = 0;
-        this.winnerEvent.emit(this.winner);
       }
       if (this.winner >= 0) {
         let angle = this.arc * (this.winner + 1/2);
