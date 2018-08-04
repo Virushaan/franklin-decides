@@ -39,6 +39,23 @@ body {
   top: -8px;
 }
 
+.franklin-btn {
+  margin-top: -20px;
+  padding-top: 0px;
+  padding-bottom: 25px;
+  padding-left: 20px;
+  width: 200px;
+  height: auto;
+}
+
+.franklin {
+  position: relative;
+  -webkit-animation: bouncing 1s infinite alternate;
+  -webkit-animation-timing-function: ease-out;
+          animation: bouncing 1s infinite alternate;
+          animation-timing-function: ease-out;
+}
+
 .loading-animation {
   background-color: black;
 }
