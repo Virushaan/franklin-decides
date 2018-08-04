@@ -29,6 +29,13 @@
           animation-timing-function: ease-out;
 }
 
+.description {
+  font-family: sans-serif;
+  color: #555;
+  margin-top: 80px;
+  padding: 0 15%;
+}
+
 .form-input-fields {
   padding-left: 7px;
   padding-right: 7px;
