@@ -1,3 +1,4 @@
 <!-- <button (click)="test()">TEST</button> -->
 <canvas #canvas width="250" height="250" (click)="spinMe()"></canvas>
+<p *ngIf="!drawing">{{ options[winner] }}</p>
 <p *ngIf="!drawing">{{ winner }}</p>
