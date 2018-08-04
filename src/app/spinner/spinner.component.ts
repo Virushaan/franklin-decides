@@ -124,8 +124,8 @@ export class SpinnerComponent implements OnInit {
         for (let i = 0; i < this.options.length; i++) {
           let lo = this.offset + this.arc * i;
           let hi = this.offset + this.arc * (i + 1);
-          if ((lo < 2 * Math.PI && hi > 2 * Math.PI)
-          || (lo < 4 * Math.PI && hi > 4 * Math.PI)) {
+          if ((lo < 2.5 * Math.PI && hi > 2.5 * Math.PI)
+          || (lo < 4.5 * Math.PI && hi > 4.5 * Math.PI)) {
             this.winner = i;
             break;
           }
