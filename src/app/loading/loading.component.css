@@ -1,3 +1,21 @@
+@keyframes bouncing {
+  0%   {top: 30px;}
+  60%  {top: 30px;}
+  100%  {top: 0px;}
+}
+
+@-webkit-keyframes bouncing {
+  0%   {top: 30px;}
+  60%  {top: 30px;}
+  100%  {top: 0px;}
+}
+
 .loading-icon {
-  
+  position: relative;
+  -webkit-animation: bouncing 0.8s infinite alternate;
+  -webkit-animation-timing-function: ease-out;
+          animation: bouncing 0.8s infinite alternate;
+          animation-timing-function: ease-out;
+  width: 40px;
+  letter-spacing: 20px;
 }
