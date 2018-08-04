@@ -68,20 +68,14 @@ export class SpinnerComponent implements OnInit {
     if (scaler < 0) {
       scaler = 0;
     }
+    this.ctx.fillStyle = "#00aad4";
+    let scale = 0.22 + scaler * 0.06;
+    this.bubble(this.ctx, x, y, this.r * scale, this.r * scale);
     let x = this.width/2 + 0.675 * this.r * Math.cos(angle)
     let y = this.height/2 + 0.675 * this.r * Math.sin(angle);
-    this.ctx.fillStyle = "#00aad4";
-    this.bubble(this.ctx, x, y, 0.22 * this.r, 0.22 * this.r);
     if (this.images[i]) {
-      // if (this.winner == i) {
-      //   let scale = 0.22 + 0.06;
-      //   this.ctx.drawImage(this.images[i], x - this.r * scale, y - this.r * scale,
-      //     this.r * scale * 2, this.r * scale * 2);
-      // } else {
-        let scale = 0.22 + scaler * 0.06;
-        this.ctx.drawImage(this.images[i], x - this.r * scale, y - this.r * scale,
-          this.r * scale * 2, this.r * scale * 2);
-      // }
+      this.ctx.drawImage(this.images[i], x - this.r * scale, y - this.r * scale,
+        this.r * scale * 2, this.r * scale * 2);
     }
   }
 
@@ -106,7 +100,7 @@ export class SpinnerComponent implements OnInit {
 
     // Pointer
     this.ctx.strokeStyle = "white";
-    this.ctx.lineWidth = 4;
+    this.ctx.lineWidth = 5.5;
     this.ctx.lineCap = "butt";
     this.ctx.fillStyle = "#00aad4";
     this.ctx.beginPath();
@@ -136,7 +130,6 @@ export class SpinnerComponent implements OnInit {
       let scale = 0.22;
       if (this.speed < 0.3 && this.speed > 0.2) {
         if (this.franklin_dizzy) {
-          console.log('a');
           this.ctx.drawImage(this.franklin_dizzy,
             this.width/2 - this.r * scale, this.height/2 - this.r * scale,
             this.r * scale * 2, this.r * scale * 2);
@@ -160,7 +153,6 @@ export class SpinnerComponent implements OnInit {
 
   drawLoop() {
     this.drawOnce();
-    console.log(this.speed);
 
     if (this.speed > 0) {
       this.speed -= this.speed * 0.009 * (Math.random() * 0.3 + 0.7) + 0.0003;
