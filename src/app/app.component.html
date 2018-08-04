@@ -38,13 +38,14 @@
 <div *ngIf="result.length >= 6 && page == 'spinner'">
   <div *ngFor="let i of createRange(6)" class="location-card">
       <img class="shape-icon" src="{{ options[i] }}" alt="">
-      <button *ngIf="!rerolled" class="die-button" mat-button>
+      <button *ngIf="!rerolled" class="die-button mat-small" mat-button>
         <img class="die-light" (click)="reroll(i)" src="../assets/die-light.png" alt="">
       </button>
       <button *ngIf="rerolled" class="die-button" mat-button>
         <img class="die-light grayed-out"src="../assets/die-light.png" alt="">
       </button>
-      {{ result[i].name }}
+      <span class="restaurant-name">{{ result[i].name }}</span>
+
     </div>
 
 </div>
