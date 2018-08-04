@@ -10,9 +10,9 @@ export class AppComponent  {
   title = 'app';
   public loading = false;
   public formUnsubmitted = true;
-  @ViewChild('div') div: ElementRef;
-  test() {
-    console.log(this.div)
-  }
+  // @ViewChild('div') div: ElementRef;
+  // test() {
+  //   console.log(this.div)
+  // }
 
 }
