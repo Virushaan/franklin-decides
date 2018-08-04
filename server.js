@@ -1,10 +1,13 @@
 //Install express server
 const express = require('express');
-const path = require('path');
 
+const path = require('path');
+const forceHTTPS = require("expressjs-force-https").forceHTTPS;
 const app = express();
 
-// Serve only the static files form the dist directory
+app.use(forceHTTPS);
+
+// Serve only the static files frmm the dist directory
 app.use(express.static(__dirname + '/dist/franklin-decides'));
 
 app.get('/', function(req,res) {
