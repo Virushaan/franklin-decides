@@ -18,6 +18,9 @@ export class SpinnerComponent implements OnInit {
   height;
   offset;
   jumpno;
+
+  tapno;
+
   speed;
   arc;
   r;
@@ -165,12 +168,21 @@ export class SpinnerComponent implements OnInit {
               this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
               this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
               this.r * scale2 * 2, this.r * scale2 * 2); // width, height
-            // if (!this.started) {
-            //   this.ctx.fillStyle = "grey";
-            //   this.ctx.font = "18px Arial";
-            //   var tW = this.ctx.measureText("Boop me");
-            //   this.ctx.fillText("Boop me", this.width/2 - tW.width/2, this.height/2 + this.r * 0.16);
-            // }
+            if (!this.started && this.tapno%160 > 140) {
+              this.ctx.strokeStyle = "lightgrey";
+              this.ctx.beginPath();
+              this.ctx.lineWidth = 8;
+              let x = this.width/2 + this.r * scale * 0.75;
+              let y = this.height/2 + this.r * scale * 0.75;
+              for(var i = 0; i < 6; i++){
+
+                  this.ctx.moveTo(x + (this.r/20 + this.tapno%20/6) * Math.sin(Math.PI/3 * i),
+                                  y + (this.r/20 + this.tapno%20/6)  * Math.cos(Math.PI/3 * i));
+                  this.ctx.lineTo(x + (this.r/10 + this.tapno%20/6)  * Math.sin(Math.PI/3 * i),
+                                  y + (this.r/10 + this.tapno%20/6)  * Math.cos(Math.PI/3 * i));
+              }
+              this.ctx.stroke()
+            }
           }
         }
       }
@@ -197,7 +209,11 @@ export class SpinnerComponent implements OnInit {
         this.drawing = false;
         this.jumpno += 1;
       }
+      if (!this.started){
+          this.tapno += 1;
+      }
     }
+
     window.requestAnimationFrame(this.drawLoop.bind(this));
   }
 
@@ -205,6 +221,7 @@ export class SpinnerComponent implements OnInit {
 
     this.winner = -1;
     this.started = false;
+    this.tapno = 0;
 
     this.drawing = false;
 
