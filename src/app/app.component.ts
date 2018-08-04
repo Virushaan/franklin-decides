@@ -11,6 +11,18 @@ export class AppComponent implements OnInit{
   constructor(private locationService:LocationServiceService, private http: HttpClient) { }
   public userName = '';
 
+  options = ["../assets/icon-knife.png", "../assets/icon-spoon.png",
+            "../assets/icon-fork.png", "../assets/icon-chef.png",
+            "../assets/icon-mug.png", "../assets/icon-bowl.png"];
+
+  createRange(number) {
+    var items = [];
+    for (var i = 0; i < number; i++) {
+      items.push(i);
+    }
+    return items;
+  }
+
   title = 'app';
   public page = 'landing';
   result: Array<any> = [];

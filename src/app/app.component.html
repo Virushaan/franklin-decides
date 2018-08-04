@@ -10,10 +10,10 @@
 	<p *ngSwitchDefault>Ended up somewhere bad?</p>
 </div>
 
-<div *ngFor="let item of result" class="location-card">
+<div *ngFor="let i of createRange(6)" class="location-card">
+  <img class="shape-icon" src="{{ options[i] }}" alt="">
 	<button class="die-button" mat-button>
 	  <img class="die-light" src="../assets/die-light.png" alt="">
 	</button>
-	{{item.name}}
+	{{ result[i].name }}
 </div>
-
