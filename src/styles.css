@@ -2,6 +2,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /* @import '~font-awesome/css/font-awesome.css'; */
 
+@import url('https://fonts.googleapis.com/css?family=Bad+Script');
+
 body {
   background-color: #F8F8F8;
   margin: 0px;
