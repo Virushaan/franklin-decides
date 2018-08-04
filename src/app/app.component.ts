@@ -38,14 +38,11 @@ export class AppComponent implements OnInit{
 
   async startEventHandler() {
     console.log("TEST")
-    this.locationService.findMe();
-    let mylocation = this.locationService.getLocation();
+    await this.locationService.findMe();
+    let mylocation = await this.locationService.getLocation();
     console.log('location:', mylocation);
-    if (!mylocation || !mylocation.longitude) {
-      this.locationService.findMe();
-    }
     this.page = 'loading';
-    this.result = await this.http.get<Array<any>>(`http://127.0.0.1:8080/get_location?longitude=${mylocation.coords.longitude}&latitude=${mylocation.coords.latitude}`).toPromise()
+    this.result = await this.http.get<Array<any>>(`https://franklin-decides-api.herokuapp.com/get_location?longitude=${mylocation.coords.longitude}&latitude=${mylocation.coords.latitude}`).toPromise()
       .catch(err => {
         this.page='spinner';
         console.log('caught');
