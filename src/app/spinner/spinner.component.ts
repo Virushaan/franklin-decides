@@ -37,7 +37,7 @@ export class SpinnerComponent implements OnInit {
   }
 
   spinMe() {
-    this.speed = Math.random() * 0.8 + 0.4;
+    this.speed = Math.random() * 0.85 + 0.4;
     this.drawing = true;
     this.winner = -1;
   }
@@ -137,7 +137,6 @@ export class SpinnerComponent implements OnInit {
           let scale2 = 0.95 * scale;
           if (this.speed < 0.7 && this.speed > 0.35) {
             if (this.franklin_dizzy) {
-              scale2 = 0.8 * scale;
               radius *= 0.3;
               this.ctx.drawImage(this.franklin_dizzy,
                 this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
@@ -161,7 +160,7 @@ export class SpinnerComponent implements OnInit {
     this.drawOnce();
 
     if (this.speed > 0) {
-      this.speed -= this.speed * 0.009 * (Math.random() * 0.3 + 0.7) + 0.0003;
+      this.speed -= this.speed * 0.008 * (Math.random() * 0.3 + 0.7) + 0.0004;
       this.offset += this.speed;
       if (this.offset > 2 * Math.PI) {
         this.offset -= 2 * Math.PI;
