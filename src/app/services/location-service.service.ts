@@ -10,31 +10,23 @@ export class LocationServiceService {
   constructor(private http: HttpClient) { }
 
   private out = new BehaviorSubject({})
+  private cachedLocation = null;
+
   cast = this.out.asObservable();
   findMe() {
-    console.log("Finding me")
+    console.log("Finding me", this)
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log('arrow')
-        // console.log(this.showPosition(position));
-        return this.showPosition(position);
+      return navigator.geolocation.getCurrentPosition((position) => {
+        this.cachedLocation = position;
+        console.log('found me', position, this);
+        return position;
       });
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
   }
 
-  showPosition(position) {
-    console.log("Hello");
-    return this.getPlaces(position.coords.latitude, position.coords.longitude);
-
+  getLocation() {
+    return this.cachedLocation;
   }
-
-  getPlaces(lat, long) {
-    // return this.http.get("localhost:8080/get_location?longitude=151.1949701&latitude=-33.881926")
-    // console.log(this.http.get("https://jsonplaceholder.typicode.com/todos/1"))
-    return this.http.get("https://jsonplaceholder.typicode.com/todos/1")
-
-  }
-
 }
