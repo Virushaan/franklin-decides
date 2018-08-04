@@ -128,23 +128,28 @@ export class SpinnerComponent implements OnInit {
           this.r * 0.45, this.r * 0.45);
     } else {
       let scale = 0.22;
-      if (this.speed < 0.3 && this.speed > 0.2) {
-        if (this.franklin_dizzy) {
-          this.ctx.drawImage(this.franklin_dizzy,
-            this.width/2 - this.r * scale, this.height/2 - this.r * scale,
-            this.r * scale * 2, this.r * scale * 2);
-          }
-      } else {
-        if (this.franklin_body && this.franklin_eyes) {
+      else {
+        if (this.franklin_body) {
           this.ctx.drawImage(this.franklin_body,
             this.width/2 - this.r * scale, this.height/2 - this.r * scale,
             this.r * scale * 2, this.r * scale * 2);
           let radius = this.r * 0.01;
           let scale2 = 0.95 * scale;
-          this.ctx.drawImage(this.franklin_eyes,
-            this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
-            this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
-            this.r * scale2 * 2, this.r * scale2 * 2); // width, height
+          if (this.speed < 0.3 && this.speed > 0.2) {
+            if (this.franklin_dizzy) {
+              this.ctx.drawImage(this.franklin_dizzy,
+                this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
+                this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
+                this.r * scale2 * 2, this.r * scale2 * 2); // width, height
+            }
+          } else {
+            if (this.franklin_eyes) {
+              this.ctx.drawImage(this.franklin_eyes,
+                this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
+                this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
+                this.r * scale2 * 2, this.r * scale2 * 2); // width, height
+            }
+          }
         }
       }
     }
@@ -207,7 +212,7 @@ export class SpinnerComponent implements OnInit {
 
     loadImage((function(img) {this.franklin_body = img}).bind(this), '../../assets/franklil-noeyes.png');
     loadImage((function(img) {this.franklin_eyes = img}).bind(this), '../../assets/franklil-eyes.png');
-    loadImage((function(img) {this.franklin_dizzy = img}).bind(this), '../../assets/franklil-dizzy.png');
+    loadImage((function(img) {this.franklin_dizzy = img}).bind(this), '../../assets/franklil-dizzy-eyes.png');
     loadImage((function(img) {this.franklin_happy = img}).bind(this), '../../assets/franklil-happy.png');
 
     this.drawLoop();
