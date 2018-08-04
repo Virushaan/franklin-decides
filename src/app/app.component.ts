@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import {LocationServiceService} from './services/location-service.service'
 
 @Component({
   selector: 'app-root',
@@ -7,23 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent  {
   title = 'app';
-
-  findMe() {
-    console.log("Finding me")
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log('arrow')
-        this.showPosition(position);
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  }
-
-  showPosition(position) {
-    console.log("Hello");
-    console.log(position.coords.latitude, position.coords.longitude);
-  }
-
+  public loading = false;
+  public formUnsubmitted = true;
+  // @ViewChild('div') div: ElementRef;
+  // test() {
+  //   console.log(this.div)
+  // }
 
 }

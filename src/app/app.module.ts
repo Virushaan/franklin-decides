@@ -11,11 +11,17 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatListModule} from '@angular/material/list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingComponent } from './loading/loading.component';
+import { FoodFormComponent } from './food-form/food-form.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent
+    LoadingComponent,
+    FoodFormComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +35,8 @@ import { LoadingComponent } from './loading/loading.component';
     MatListModule,
     MatToolbarModule,
     MatSelectModule,
+    MatGridListModule,
+    MatCheckboxModule,
     FormsModule,
   ],
   providers: [],
