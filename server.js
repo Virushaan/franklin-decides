@@ -9,7 +9,7 @@ const app = express();
 app.use(express.static(__dirname + "/dist/franklin-decides"));
 
 app.use(function(req, res, next) {
-  if(!req.secure) {
+  if(req.get('X-Forwarded-Proto') === 'http') {
     return res.redirect('https://franklin-decides.herokuapp.com');
   }
   next();
@@ -20,4 +20,4 @@ app.get("/", function(req, res) {
 });
 
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 3000);
