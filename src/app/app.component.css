@@ -3,20 +3,20 @@ body {
 }
 
 .location-card {
-  margin-left: -35px;
-  width: 99%;
-  margin-bottom: -15px;
-}
-
-mat-card-content {
-  padding-top: 5px;
+  width: 100%;
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .die-light {
-  width:20px;
+  width: 20px;
   height: auto;
 }
 
 .die-button {
   float: right;
+  position: relative;
+  top: -8px;
 }
