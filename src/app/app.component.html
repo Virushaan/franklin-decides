@@ -2,3 +2,4 @@
 
 <app-food-form (nameEvent)="nameEventHander($event)" #div *ngIf="formUnsubmitted && !loading"></app-food-form>
 <app-loading *ngIf="loading"></app-loading>
+<li *ngFor="let item of result">{{item.name}}</li>
