@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {LocationServiceService} from './services/location-service.service'
 
 @Component({
   selector: 'app-root',
@@ -8,22 +9,10 @@ import { Component } from '@angular/core';
 export class AppComponent  {
   title = 'app';
 
-  findMe() {
-    console.log("Finding me")
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log('arrow')
-        this.showPosition(position);
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  }
+  constructor(private locationService:LocationServiceService) { }
 
-  showPosition(position) {
-    console.log("Hello");
-    console.log(position.coords.latitude, position.coords.longitude);
+  getLocation() {
+    this.locationService.findMe();
   }
-
 
 }
