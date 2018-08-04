@@ -1,22 +1,27 @@
 @keyframes bouncing {
-  0%   {top: 30px;}
-  50%  {top: 30px;}
-  100%  {top: 0px;}
+  0%   { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
+  30%  { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
+  44%  { top: 35px; transform: scaleY(0.85) scaleX(1.15); }
+  50%  { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
+  100% { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
 }
 
 @-webkit-keyframes bouncing {
-  0%   {top: 30px;}
-  50%  {top: 30px;}
-  100%  {top: 0px;}
+  0%   { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
+  30%  { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
+  44%  { top: 35px; transform: scaleY(0.85) scaleX(1.15); }
+  50%  { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
+  100% { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
 }
 
 .loading-icon {
   position: relative;
-  -webkit-animation: bouncing 0.55s infinite alternate;
+  -webkit-animation: bouncing .55s infinite alternate;
   -webkit-animation-timing-function: ease-out;
-          animation: bouncing 0.55s infinite alternate;
+          animation: bouncing .55s infinite alternate;
           animation-timing-function: ease-out;
   width: 40px;
+  height: 40px;
   margin: 5px;
 }
 
@@ -30,4 +35,3 @@
   padding: 5px;
   margin: 0 auto;
 }
-
