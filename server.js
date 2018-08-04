@@ -9,13 +9,10 @@ const app = express();
 app.use(express.static(__dirname + "/dist/franklin-decides"));
 
 app.use(function(req, res, next) {
-  if (req.secure) {
-    // request was via https, so do no special handling
-    next();
-  } else {
-    // request was via http, so redirect to https
-    res.redirect("https://" + req.headers.host + req.url);
+  if(!req.secure) {
+    return res.redirect('https://franklin-decides.herokuapp.com');
   }
+  next();
 });
 
 app.get("/", function(req, res) {
