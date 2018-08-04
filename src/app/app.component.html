@@ -1,4 +1,9 @@
-<api-test></api-test>
-<!--
-<app-food-form #div *ngIf="formUnsubmitted"></app-food-form>
-<app-loading *ngIf="loading"></app-loading> -->
+<div [ngSwitch]="page">
+	<app-food-form
+		*ngSwitchCase="'landing'"
+		(nameEvent)="nameEventHander($event)"
+		(startEvent)="startEventHandler($event)">
+	</app-food-form>
+	<app-loading *ngSwitchCase="'loading'"></app-loading>
+	<p *ngSwitchDefault>Ended up somewhere bad?</p>
+</div>

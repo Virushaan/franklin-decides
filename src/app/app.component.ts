@@ -10,9 +10,28 @@ export class AppComponent  {
   title = 'app';
   public loading = false;
   public formUnsubmitted = true;
-  // @ViewChild('div') div: ElementRef;
-  // test() {
-  //   console.log(this.div)
-  // }
+  public page = 'landing';
+  // landing - home page
+  // loading - loading things
+  // spinner - page with the spinner
+  // results - results page
 
+  nameEventHander($event: any) {
+
+    this.userName = $event;
+    console.log(this.userName)
+    if (this.userName == "loaded") {
+      this.loading = true;
+      this.formUnsubmitted = false;
+    }
+  }
+
+  startEventHandler() {
+    this.page = 'loading';
+    // todo: request stuff from server
+  }
+
+  spinCompleteHandler() {
+    // ...
+  }
 }

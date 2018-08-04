@@ -1,3 +1,4 @@
+<!--
 <mat-card class="food-form">
   <mat-grid-list cols="2" rowHeight="300px">
     <mat-grid-tile class="form-input-fields">
@@ -10,12 +11,18 @@
             </mat-form-field>
             <mat-checkbox matInput>Offers delivery</mat-checkbox>
       </div>
-
-
-
     </mat-grid-tile>
     <mat-grid-tile>
       <img class="franklin-btn" (click)="getLocation()" src="../../assets/franklin.svg">
     </mat-grid-tile>
   </mat-grid-list>
 </mat-card>
+-->
+
+<div class="fill">
+  <div>
+    <img class="franklin-btn" (click)="formSubmit()" src="../../assets/franklin.svg">
+    <br>
+   <button (click)="start()">Start!</button>      
+  </div>
+</div>
