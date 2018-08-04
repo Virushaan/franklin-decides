@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
   public loading = false;
   public formUnsubmitted = true;
   public page = 'landing';
-  result = {};
+  result: Array<any>;
 
   async nameEventHander($event: any) {
 
@@ -25,12 +25,13 @@ export class AppComponent implements OnInit{
 
   }
   async startEventHandler() {
-    this.page = 'spinner';
+    this.page = 'loading';
+
     console.log("test")
       this.loading = true;
       this.formUnsubmitted = false;
       // this.result = this.locationService.findMe();
-      this.result = await this.http.get("http://127.0.0.1:8080/get_location?longitude=151.1949701&latitude=-33.881926").toPromise()
+      this.result = await this.http.get<Array<any>>("http://127.0.0.1:8080/get_location?longitude=151.1949701&latitude=-33.881926").toPromise()
       .catch(err => {
         console.log('caught');
         return ([
@@ -196,6 +197,10 @@ export class AppComponent implements OnInit{
           }
       ]);
       });;
+      console.log(this.result.splice(0,6));
+      this.result = this.result.splice(0,6);
+      // this.result = this.result.splice(0,7)
+      this.page = 'spinner';
       console.log(this.locationService.findMe());
       console.log(this.result);
 
