@@ -37,7 +37,7 @@ export class SpinnerComponent implements OnInit {
   }
 
   spinMe() {
-    this.speed = Math.random() * 0.4 + 0.4;
+    this.speed = Math.random() * 0.8 + 0.4;
     this.drawing = true;
     this.winner = -1;
   }
@@ -121,13 +121,13 @@ export class SpinnerComponent implements OnInit {
     this.ellipse(this.ctx, this.r * 0.4 - 6, this.r * 0.4 - 6);
 
     // Draw Franklin
+    let scale = 0.22;
     if (this.winner !== -1) {
       if (this.franklin_happy)
         this.ctx.drawImage(this.franklin_happy,
-          this.width/2 - this.r * 0.225, this.height/2 - this.r * 0.225,
-          this.r * 0.45, this.r * 0.45);
+          this.width/2 - this.r * scale, this.height/2 - this.r * scale,
+          this.r * scale * 2, this.r * scale * 2);
     } else {
-      let scale = 0.22;
       else {
         if (this.franklin_body) {
           this.ctx.drawImage(this.franklin_body,
@@ -135,8 +135,10 @@ export class SpinnerComponent implements OnInit {
             this.r * scale * 2, this.r * scale * 2);
           let radius = this.r * 0.01;
           let scale2 = 0.95 * scale;
-          if (this.speed < 0.3 && this.speed > 0.2) {
+          if (this.speed < 0.7 && this.speed > 0.35) {
             if (this.franklin_dizzy) {
+              scale2 = 0.8 * scale;
+              radius *= 0.3;
               this.ctx.drawImage(this.franklin_dizzy,
                 this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
                 this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
@@ -153,7 +155,6 @@ export class SpinnerComponent implements OnInit {
         }
       }
     }
-
   }
 
   drawLoop() {
@@ -179,6 +180,8 @@ export class SpinnerComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.winner = -1;
 
     this.drawing = false;
 
