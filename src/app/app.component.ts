@@ -16,18 +16,18 @@ export class AppComponent  {
   // spinner - page with the spinner
   // results - results page
 
-  nameEventHander($event: any) {
+  // nameEventHander($event: any) {
 
-    this.userName = $event;
-    console.log(this.userName)
-    if (this.userName == "loaded") {
-      this.loading = true;
-      this.formUnsubmitted = false;
-    }
-  }
+  //   this.userName = $event;
+  //   console.log(this.userName)
+  //   if (this.userName == "loaded") {
+  //     this.loading = true;
+  //     this.formUnsubmitted = false;
+  //   }
+  // }
 
   startEventHandler() {
-    this.page = 'loading';
+    this.page = 'spinner';
     // todo: request stuff from server
   }
 

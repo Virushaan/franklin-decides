@@ -1,9 +1,11 @@
 <div [ngSwitch]="page">
 	<app-food-form
 		*ngSwitchCase="'landing'"
-		(nameEvent)="nameEventHander($event)"
 		(startEvent)="startEventHandler($event)">
 	</app-food-form>
 	<app-loading *ngSwitchCase="'loading'"></app-loading>
+	<div *ngSwitchCase="'spinner'">
+		<app-spinner></app-spinner>
+	</div>
 	<p *ngSwitchDefault>Ended up somewhere bad?</p>
 </div>
