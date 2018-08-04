@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-spinner',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('canvas') canvas: ElementRef;
 
-  ngOnInit() {
+  let options = ["Sushi", "Pizza", "Taco", "Beer", "Hungrier", "Sprite", "Watermelon", "Burrito"];
+  let startAngle = 0;
+  let arc = Math.PI * 2 / 8;
+
+  test() {
+    console.log(this.canvas);
+
   }
-
 }
