@@ -19,13 +19,18 @@ export class AppComponent implements OnInit{
 
   async nameEventHander($event: any) {
 
-    this.userName = $event;
-    console.log(this.userName)
-    if (this.userName == "loaded") {
+
+  }
+  ngOnInit() {
+
+  }
+  async startEventHandler() {
+    this.page = 'spinner';
+    console.log("test")
       this.loading = true;
       this.formUnsubmitted = false;
       // this.result = this.locationService.findMe();
-      this.result = await this.http.get("/api/get_location?longitude=151.1949701&latitude=-33.881926").toPromise()
+      this.result = await this.http.get("http://127.0.0.1:8080/get_location?longitude=151.1949701&latitude=-33.881926").toPromise()
       .catch(err => {
         console.log('caught');
         return ([
@@ -193,13 +198,7 @@ export class AppComponent implements OnInit{
       });;
       console.log(this.locationService.findMe());
       console.log(this.result);
-    }
-  }
-  ngOnInit() {
 
-  }
-  startEventHandler() {
-    this.page = 'spinner';
     // todo: request stuff from server
   }
 
