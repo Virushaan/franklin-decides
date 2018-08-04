@@ -70,6 +70,7 @@ h1 {
   font-weight: bold;
   font-family: 'Bad Script', cursive;
   transform: rotate(-5deg);
+  line-height: 100%;
   margin: 0px;
 }
 
