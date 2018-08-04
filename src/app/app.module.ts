@@ -11,11 +11,13 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatListModule} from '@angular/material/list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingComponent } from './loading/loading.component';
+import { FoodFormComponent } from './food-form/food-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent
+    LoadingComponent,
+    FoodFormComponent
   ],
   imports: [
     BrowserModule,
