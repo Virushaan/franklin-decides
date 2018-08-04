@@ -17,3 +17,29 @@
 mat-form-field {
   display: block;
 }
+
+.show-form {
+  color: white;
+  cursor: pointer;
+}
+
+.fill {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+}
+
+button {
+  text-align: center;
+  border: 0;
+  border-style: none;
+  padding: 4px;
+  border-radius: 3px;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocationServiceService } from '../services/location-service.service';
 
 @Component({
@@ -8,12 +8,23 @@ import { LocationServiceService } from '../services/location-service.service';
 })
 export class FoodFormComponent implements OnInit {
 
+  @Output() nameEvent = new EventEmitter<string>();
+  @Output() startEvent = new EventEmitter<void>();
+  userName: string = 'none';
+
+  renderForm = false;
+  formCharacter = 'v';
   constructor(private locationService:LocationServiceService) { }
 
   getLocation() {
     this.locationService.findMe();
   }
   ngOnInit() {
+  }
+
+  start() {
+    console.log('???');
+    this.startEvent.emit();
   }
 
 }
