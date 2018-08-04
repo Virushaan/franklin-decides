@@ -24,8 +24,6 @@ export class SpinnerComponent implements OnInit {
   happy_franklin = null;
   ctx: CanvasRenderingContext2D;
 
-  colors = [];
-
   @ViewChild('canvas') canvas: ElementRef;
 
 
@@ -45,8 +43,8 @@ export class SpinnerComponent implements OnInit {
     ctx.beginPath();
     ctx.ellipse(this.width/2, this.height/2, width, height, 0, start, end, false);
     ctx.lineTo(this.width/2, this.height/2);
-    // ctx.fill();
-    ctx.stroke();
+    ctx.fill();
+    // ctx.stroke();
   }
 
   bubble(ctx, x, y, width, height) {
@@ -77,25 +75,39 @@ export class SpinnerComponent implements OnInit {
   drawOnce() {
     this.ctx.clearRect(0, 0, this.width, this.height);
 
-    this.ctx.fillStyle = "black";
-    this.ellipse(this.ctx, this.r, this.r);
+    // this.ctx.fillStyle = "black";
+    // this.ellipse(this.ctx, this.r, this.r);
     this.ctx.fillStyle = "white";
     this.ellipse(this.ctx, this.r-5, this.r-5);
 
     for (let i = 0; i < this.options.length; i++) {
-      this.ctx.fillStyle = "white";
-      this.ctx.strokeStyle = "#ccc";
+      this.ctx.fillStyle = (i % 2) ? "#f0f0f0" : "#fff";
+      // this.ctx.strokeStyle = "#ccc";
       this.ctx.lineWidth = 2;
       this.drawSector(i);
     }
 
-    this.ctx.fillStyle = "black";
-    this.ellipse(this.ctx, this.r * 0.4, this.r * 0.4);
+    // White border
     this.ctx.fillStyle = "white";
     this.ellipse(this.ctx, this.r * 0.4 - 3, this.r * 0.4 - 3);
+
+    // Pointer
+    this.ctx.strokeStyle = "white";
+    this.ctx.lineWidth = 4;
+    this.ctx.lineCap = "butt";
+    this.ctx.fillStyle = "#00aad4";
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.width * 0.46, this.height * 0.67);
+    this.ctx.lineTo(this.width/2, this.height * 0.72);
+    this.ctx.lineTo(this.width * 0.54, this.height * 0.67);
+    this.ctx.stroke();
+    this.ctx.fill();
+
+    // Blue circle
     this.ctx.fillStyle = "#00aad4";
     this.ellipse(this.ctx, this.r * 0.4 - 6, this.r * 0.4 - 6);
 
+    // Draw Franklin
     if (this.winner !== -1) {
       if (this.happy_franklin)
         this.ctx.drawImage(this.happy_franklin,
@@ -124,7 +136,8 @@ export class SpinnerComponent implements OnInit {
         for (let i = 0; i < this.options.length; i++) {
           let lo = this.offset + this.arc * i;
           let hi = this.offset + this.arc * (i + 1);
-          if ((lo < 2.5 * Math.PI && hi > 2.5 * Math.PI)
+          if ((lo < 0.5 * Math.PI && hi > 0.5 * Math.PI)
+          || (lo < 2.5 * Math.PI && hi > 2.5 * Math.PI)
           || (lo < 4.5 * Math.PI && hi > 4.5 * Math.PI)) {
             this.winner = i;
             break;
@@ -148,10 +161,6 @@ export class SpinnerComponent implements OnInit {
 
     this.arc = 2 * Math.PI / this.options.length;
     this.r = this.width/2.1;
-
-    for (let i = 0; i < this.options.length; i++) {
-      this.colors.push('hsl(' + Math.floor(i / this.options.length * 360) + ', 100%, 70%)');
-    }
 
     function imageSetter(parent, array, i, img) {
       return function() {
