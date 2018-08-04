@@ -165,12 +165,12 @@ export class SpinnerComponent implements OnInit {
               this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
               this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
               this.r * scale2 * 2, this.r * scale2 * 2); // width, height
-            if (!this.started) {
-              this.ctx.fillStyle = "grey";
-              this.ctx.font = "18px Arial";
-              var tW = this.ctx.measureText("Boop me");
-              this.ctx.fillText("Boop me", this.width/2 - tW.width/2, this.height/2 + this.r * 0.16);
-            }
+            // if (!this.started) {
+            //   this.ctx.fillStyle = "grey";
+            //   this.ctx.font = "18px Arial";
+            //   var tW = this.ctx.measureText("Boop me");
+            //   this.ctx.fillText("Boop me", this.width/2 - tW.width/2, this.height/2 + this.r * 0.16);
+            // }
           }
         }
       }
