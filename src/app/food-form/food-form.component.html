@@ -1,0 +1,21 @@
+<mat-card class="food-form">
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile class="form-input-fields">
+      <div>
+          <mat-form-field class="full-width">
+              <input matInput placeholder="Cuisine">
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Distance">
+            </mat-form-field>
+            <mat-checkbox matInput>Offers delivery</mat-checkbox>
+      </div>
+
+
+
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <img class="franklin-btn" (click)="getLocation()" src="../../assets/franklin.svg">
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
