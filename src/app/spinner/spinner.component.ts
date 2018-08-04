@@ -7,11 +7,10 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  options = ["../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
-             "../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
-             "../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
-             "../../assets/franklin-flag.png"];
-  images = [null, null, null, null, null, null, null];
+  options = ["../../assets/icon-knife.png", "../../assets/icon-spoon.png",
+            "../../assets/icon-fork.png", "../../assets/icon-chef.png",
+            "../../assets/icon-mug.png", "../../assets/icon-bowl.png"];
+  images = [null, null, null, null, null, null];
 
   width;
   height;
@@ -19,6 +18,10 @@ export class SpinnerComponent implements OnInit {
   speed;
   arc;
   r;
+  drawing;
+  winner;
+  franklin = null;
+  happy_franklin = null;
   ctx: CanvasRenderingContext2D;
 
   colors = [];
@@ -34,6 +37,8 @@ export class SpinnerComponent implements OnInit {
 
   spinMe() {
     this.speed = Math.random() * 0.4 + 0.4;
+    this.drawing = true;
+    this.winner = -1;
   }
 
   sector(ctx, width, height, start, end) {
@@ -54,17 +59,22 @@ export class SpinnerComponent implements OnInit {
     this.sector(this.ctx, this.r-5, this.r-5,
       this.offset + i * this.arc, this.offset + (i + 1) * this.arc);
     let angle = this.offset + (i + 1/2) * this.arc;
-    let x = this.width/2 + 0.66 * this.r * Math.cos(angle)
-    let y = this.height/2 + 0.66 * this.r * Math.sin(angle);
-    this.ctx.fillStyle = "red";
+    let x = this.width/2 + 0.675 * this.r * Math.cos(angle)
+    let y = this.height/2 + 0.675 * this.r * Math.sin(angle);
+    this.ctx.fillStyle = "#00aad4";
     this.bubble(this.ctx, x, y, 0.22 * this.r, 0.22 * this.r);
     if (this.images[i]) {
-      this.ctx.drawImage(this.images[i], x - this.r * 0.22, y - this.r * 0.22,
-                                         this.r * 0.44, this.r * 0.44);
+      if (this.winner == i) {
+        this.ctx.drawImage(this.images[i], x - this.r * 0.25, y - this.r * 0.25,
+          this.r * 0.5, this.r * 0.5);
+      } else {
+        this.ctx.drawImage(this.images[i], x - this.r * 0.22, y - this.r * 0.22,
+          this.r * 0.44, this.r * 0.44);
+      }
     }
   }
 
-  drawLoop() {
+  drawOnce() {
     this.ctx.clearRect(0, 0, this.width, this.height);
 
     this.ctx.fillStyle = "black";
@@ -73,23 +83,62 @@ export class SpinnerComponent implements OnInit {
     this.ellipse(this.ctx, this.r-5, this.r-5);
 
     for (let i = 0; i < this.options.length; i++) {
-      //this.ctx.fillStyle = this.colors[i];
       this.ctx.fillStyle = "white";
-      // this.ctx.strokeStyle = this.colors[i];
       this.ctx.strokeStyle = "#ccc";
       this.ctx.lineWidth = 2;
       this.drawSector(i);
     }
 
+    this.ctx.fillStyle = "black";
+    this.ellipse(this.ctx, this.r * 0.4, this.r * 0.4);
+    this.ctx.fillStyle = "white";
+    this.ellipse(this.ctx, this.r * 0.4 - 3, this.r * 0.4 - 3);
+    this.ctx.fillStyle = "#00aad4";
+    this.ellipse(this.ctx, this.r * 0.4 - 6, this.r * 0.4 - 6);
+
+    if (this.winner !== -1) {
+      if (this.happy_franklin)
+        this.ctx.drawImage(this.happy_franklin,
+          this.width/2 - this.r * 0.225, this.height/2 - this.r * 0.225,
+          this.r * 0.45, this.r * 0.45);
+    } else {
+      if (this.franklin)
+        this.ctx.drawImage(this.franklin,
+          this.width/2 - this.r * 0.22, this.height/2 - this.r * 0.22,
+          this.r * 0.44, this.r * 0.44);
+    }
+
+  }
+
+  drawLoop() {
+    this.drawOnce();
+
     if (this.speed > 0) {
       this.speed -= this.speed * 0.01 * (Math.random() * 0.3 + 0.7) + 0.0003;
       this.offset += this.speed;
+      if (this.offset > 2 * Math.PI) {
+        this.offset -= 2 * Math.PI;
+      }
+    } else {
+      if (this.drawing) {
+        for (let i = 0; i < this.options.length; i++) {
+          let lo = this.offset + this.arc * i;
+          let hi = this.offset + this.arc * (i + 1);
+          if ((lo < 2 * Math.PI && hi > 2 * Math.PI)
+          || (lo < 4 * Math.PI && hi > 4 * Math.PI)) {
+            this.winner = i;
+            break;
+          }
+        }
+      }
+      this.drawing = false;
     }
-
     window.requestAnimationFrame(this.drawLoop.bind(this));
   }
 
   ngOnInit() {
+
+    this.drawing = false;
 
     this.width = this.canvas.nativeElement.width;
     this.height = this.canvas.nativeElement.height;
@@ -104,18 +153,33 @@ export class SpinnerComponent implements OnInit {
       this.colors.push('hsl(' + Math.floor(i / this.options.length * 360) + ', 100%, 70%)');
     }
 
-    function imageSetter(array, i, img) {
+    function imageSetter(parent, array, i, img) {
       return function() {
         array[i] = img;
-        console.log(array);
+        parent.drawOnce();
       }
     }
 
     for (let i = 0; i < this.options.length; i++) {
       var img = new Image();
-      img.onload = imageSetter(this.images, i, img);
+      img.onload = imageSetter(this, this.images, i, img);
       img.src = this.options[i];
     }
+
+    var img = new Image();
+    img.onload = (function(parent) {
+      return function() {
+        parent.franklin = img;
+      }
+    })(this);
+    img.src = '../../assets/franklil.png';
+    var img2 = new Image();
+    img2.onload = (function(parent) {
+      return function() {
+        parent.happy_franklin = img2;
+      }
+    })(this);
+    img2.src = '../../assets/franklil-happy.png';
 
     this.drawLoop();
   }
