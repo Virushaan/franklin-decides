@@ -133,14 +133,26 @@ export class SpinnerComponent implements OnInit {
           this.width/2 - this.r * 0.225, this.height/2 - this.r * 0.225,
           this.r * 0.45, this.r * 0.45);
     } else {
-      if (this.franklin_body && this.franklin_eyes) {
-        this.ctx.drawImage(this.franklin_body,
-          this.width/2 - this.r * 0.22, this.height/2 - this.r * 0.22,
-          this.r * 0.44, this.r * 0.44);
-        let radius = this.r * 0.01;
-        this.ctx.drawImage(this.franklin_eyes,
-          this.width/2 - this.r * 0.22, this.height/2 - this.r * 0.22,
-          this.r * 0.44, this.r * 0.44);
+      let scale = 0.22;
+      if (this.speed < 0.3 && this.speed > 0.2) {
+        if (this.franklin_dizzy) {
+          console.log('a');
+          this.ctx.drawImage(this.franklin_dizzy,
+            this.width/2 - this.r * scale, this.height/2 - this.r * scale,
+            this.r * scale * 2, this.r * scale * 2);
+          }
+      } else {
+        if (this.franklin_body && this.franklin_eyes) {
+          this.ctx.drawImage(this.franklin_body,
+            this.width/2 - this.r * scale, this.height/2 - this.r * scale,
+            this.r * scale * 2, this.r * scale * 2);
+          let radius = this.r * 0.01;
+          let scale2 = 0.95 * scale;
+          this.ctx.drawImage(this.franklin_eyes,
+            this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
+            this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
+            this.r * scale2 * 2, this.r * scale2 * 2); // width, height
+        }
       }
     }
 
@@ -148,6 +160,7 @@ export class SpinnerComponent implements OnInit {
 
   drawLoop() {
     this.drawOnce();
+    console.log(this.speed);
 
     if (this.speed > 0) {
       this.speed -= this.speed * 0.009 * (Math.random() * 0.3 + 0.7) + 0.0003;
