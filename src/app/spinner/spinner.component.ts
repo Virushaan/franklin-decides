@@ -5,11 +5,26 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.css']
 })
-export class SpinnerComponent {
+export class SpinnerComponent implements OnInit {
 
-  constructor() { }
+  options = ["../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
+             "../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
+             "../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
+             "../../assets/franklin-flag.png"];
+  images = [null, null, null, null, null, null, null];
+
+  width;
+  height;
+  offset;
+  speed;
+  arc;
+  r;
+  ctx: CanvasRenderingContext2D;
+
+  colors = [];
 
   @ViewChild('canvas') canvas: ElementRef;
+
 
   ellipse(ctx, width, height) {
     ctx.beginPath();
@@ -74,5 +89,34 @@ export class SpinnerComponent {
     window.requestAnimationFrame(this.drawLoop.bind(this));
   }
 
+  ngOnInit() {
 
+    this.width = this.canvas.nativeElement.width;
+    this.height = this.canvas.nativeElement.height;
+    this.ctx = this.canvas.nativeElement.getContext('2d');
+
+    this.offset = 0;
+
+    this.arc = 2 * Math.PI / this.options.length;
+    this.r = this.width/2.1;
+
+    for (let i = 0; i < this.options.length; i++) {
+      this.colors.push('hsl(' + Math.floor(i / this.options.length * 360) + ', 100%, 70%)');
+    }
+
+    function imageSetter(array, i, img) {
+      return function() {
+        array[i] = img;
+        console.log(array);
+      }
+    }
+
+    for (let i = 0; i < this.options.length; i++) {
+      var img = new Image();
+      img.onload = imageSetter(this.images, i, img);
+      img.src = this.options[i];
+    }
+
+    this.drawLoop();
+  }
 }
