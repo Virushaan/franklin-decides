@@ -13,8 +13,8 @@ export class AppComponent implements OnInit{
 
   title = 'app';
   public page = 'landing';
+  result: Array<any> = [];
 
-  result = {};
   async nameEventHander($event: any) {
 
 
@@ -32,10 +32,7 @@ export class AppComponent implements OnInit{
       return;
     }
     this.page = 'loading';
-    this.result = await this.http.get(`http://127.0.0.1:8080/get_location?longitude=${mylocation.longitude}&latitude=${mylocation.latitude}`).toPromise()
-      .then(x => {
-        this.page='spinner';
-      })
+    this.result = await this.http.get<Array<any>>(`http://127.0.0.1:8080/get_location?longitude=${mylocation.longitude}&latitude=${mylocation.latitude}`).toPromise()
       .catch(err => {
         this.page='spinner';
         console.log('caught');
@@ -202,7 +199,11 @@ export class AppComponent implements OnInit{
           }
       ]);
       });;
-    // todo: request stuff from server
+
+      console.log(this.result.splice(0,6));
+      this.result = this.result.splice(0,6);
+      // this.result = this.result.splice(0,7)
+      this.page = 'spinner';
   }
 
   spinCompleteHandler() {
