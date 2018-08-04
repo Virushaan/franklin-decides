@@ -16,6 +16,9 @@
       <button *ngIf="!rerolled" class="die-button" mat-button>
         <img class="die-light" (click)="reroll(i)" src="../assets/die-light.png" alt="">
       </button>
+      <button *ngIf="rerolled" class="die-button" mat-button>
+        <img class="die-light grayed-out"src="../assets/die-light.png" alt="">
+      </button>
       {{ result[i].name }}
     </div>
 
