@@ -1,9 +1,9 @@
 @keyframes bouncing {
   0%   { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
-  30%  { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
-  44%  { top: 5px; transform: scaleY(0.85) scaleX(1.10); }
-  50%  { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
-  100% { top: -30px; transform: scaleY(1.0) scaleX(1.0); }
+  45%  { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
+  60%  { top: 15px; transform: scaleY(0.85) scaleX(1.10); }
+  70%  { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
+  100% { top: -55px; transform: scaleY(1.0) scaleX(1.0); }
 }
 
 .food-form {
