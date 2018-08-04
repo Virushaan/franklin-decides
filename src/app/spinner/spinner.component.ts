@@ -134,28 +134,26 @@ export class SpinnerComponent implements OnInit {
           this.r * scale * 2, this.r * scale * 2);
       }
     } else {
-      else {
-        if (this.franklin_body) {
-          this.ctx.drawImage(this.franklin_body,
-            this.width/2 - this.r * scale, this.height/2 - this.r * scale,
-            this.r * scale * 2, this.r * scale * 2);
-          let radius = this.r * 0.01;
-          let scale2 = 0.95 * scale;
-          if (this.speed < 0.7 && this.speed > 0.35) {
-            if (this.franklin_dizzy) {
-              radius *= 0.3;
-              this.ctx.drawImage(this.franklin_dizzy,
-                this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
-                this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
-                this.r * scale2 * 2, this.r * scale2 * 2); // width, height
-            }
-          } else {
-            if (this.franklin_eyes) {
-              this.ctx.drawImage(this.franklin_eyes,
-                this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
-                this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
-                this.r * scale2 * 2, this.r * scale2 * 2); // width, height
-            }
+      if (this.franklin_body) {
+        this.ctx.drawImage(this.franklin_body,
+          this.width/2 - this.r * scale, this.height/2 - this.r * scale,
+          this.r * scale * 2, this.r * scale * 2);
+        let radius = this.r * 0.01;
+        let scale2 = 0.95 * scale;
+        if (this.speed < 0.7 && this.speed > 0.35) {
+          if (this.franklin_dizzy) {
+            radius *= 0.3;
+            this.ctx.drawImage(this.franklin_dizzy,
+              this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
+              this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
+              this.r * scale2 * 2, this.r * scale2 * 2); // width, height
+          }
+        } else {
+          if (this.franklin_eyes) {
+            this.ctx.drawImage(this.franklin_eyes,
+              this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
+              this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
+              this.r * scale2 * 2, this.r * scale2 * 2); // width, height
           }
         }
       }
