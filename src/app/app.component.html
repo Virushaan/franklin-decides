@@ -1,4 +1,11 @@
-<app-spinner></app-spinner>
-
-<!-- <app-food-form (nameEvent)="nameEventHander($event)" #div *ngIf="formUnsubmitted && !loading"></app-food-form>
-<app-loading *ngIf="loading"></app-loading> -->
+<div [ngSwitch]="page">
+	<app-food-form
+		*ngSwitchCase="'landing'"
+		(startEvent)="startEventHandler($event)">
+	</app-food-form>
+	<app-loading *ngSwitchCase="'loading'"></app-loading>
+	<div *ngSwitchCase="'spinner'">
+		<app-spinner></app-spinner>
+	</div>
+	<p *ngSwitchDefault>Ended up somewhere bad?</p>
+</div>
