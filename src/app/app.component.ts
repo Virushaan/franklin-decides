@@ -7,12 +7,20 @@ import {LocationServiceService} from './services/location-service.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  {
+
+  public userName = '';
+
   title = 'app';
   public loading = false;
   public formUnsubmitted = true;
-  // @ViewChild('div') div: ElementRef;
-  // test() {
-  //   console.log(this.div)
-  // }
 
+  nameEventHander($event: any) {
+
+    this.userName = $event;
+    console.log(this.userName)
+    if (this.userName == "loaded") {
+      this.loading = true;
+      this.formUnsubmitted = false;
+    }
+  }
 }
