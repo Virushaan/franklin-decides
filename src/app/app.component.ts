@@ -45,7 +45,7 @@ export class AppComponent implements OnInit{
       this.locationService.findMe();
     }
     this.page = 'loading';
-    this.result = await this.http.get<Array<any>>(`http://127.0.0.1:8080/get_location?longitude=${mylocation.longitude}&latitude=${mylocation.latitude}`).toPromise()
+    this.result = await this.http.get<Array<any>>(`http://127.0.0.1:8080/get_location?longitude=${mylocation.coords.longitude}&latitude=${mylocation.coords.latitude}`).toPromise()
       .catch(err => {
         this.page='spinner';
         console.log('caught');
