@@ -71,9 +71,9 @@ export class SpinnerComponent implements OnInit {
     }
     this.ctx.fillStyle = "#00aad4";
     let scale = 0.22 + scaler * 0.06;
-    this.bubble(this.ctx, x, y, this.r * scale, this.r * scale);
     let x = this.width/2 + 0.675 * this.r * Math.cos(angle)
     let y = this.height/2 + 0.675 * this.r * Math.sin(angle);
+    this.bubble(this.ctx, x, y, this.r * scale, this.r * scale);
     if (this.images[i]) {
       this.ctx.drawImage(this.images[i], x - this.r * scale, y - this.r * scale,
         this.r * scale * 2, this.r * scale * 2);
