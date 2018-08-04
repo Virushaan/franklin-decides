@@ -7,11 +7,10 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  options = ["../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
-             "../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
-             "../../assets/franklin-flag.png", "../../assets/franklin-flag.png",
-             "../../assets/franklin-flag.png"];
-  images = [null, null, null, null, null, null, null];
+  options = ["../../assets/icon-knife.png", "../../assets/icon-spoon.png",
+            "../../assets/icon-fork.png", "../../assets/icon-chef.png",
+            "../../assets/icon-mug.png", "../../assets/icon-bowl.png"];
+  images = [null, null, null, null, null, null];
 
   width;
   height;
@@ -20,6 +19,8 @@ export class SpinnerComponent implements OnInit {
   arc;
   r;
   drawing;
+  winner;
+  franklin = null;
   ctx: CanvasRenderingContext2D;
 
   colors = [];
@@ -35,7 +36,6 @@ export class SpinnerComponent implements OnInit {
 
   spinMe() {
     this.speed = Math.random() * 0.4 + 0.4;
-    this.drawLoop();
     this.drawing = true;
   }
 
@@ -59,7 +59,7 @@ export class SpinnerComponent implements OnInit {
     let angle = this.offset + (i + 1/2) * this.arc;
     let x = this.width/2 + 0.66 * this.r * Math.cos(angle)
     let y = this.height/2 + 0.66 * this.r * Math.sin(angle);
-    this.ctx.fillStyle = "red";
+    this.ctx.fillStyle = "#00aad4";
     this.bubble(this.ctx, x, y, 0.22 * this.r, 0.22 * this.r);
     if (this.images[i]) {
       this.ctx.drawImage(this.images[i], x - this.r * 0.22, y - this.r * 0.22,
@@ -76,13 +76,20 @@ export class SpinnerComponent implements OnInit {
     this.ellipse(this.ctx, this.r-5, this.r-5);
 
     for (let i = 0; i < this.options.length; i++) {
-      //this.ctx.fillStyle = this.colors[i];
       this.ctx.fillStyle = "white";
-      // this.ctx.strokeStyle = this.colors[i];
       this.ctx.strokeStyle = "#ccc";
       this.ctx.lineWidth = 2;
       this.drawSector(i);
     }
+
+    this.ctx.fillStyle = "black";
+    this.ellipse(this.ctx, this.r * 0.4, this.r * 0.4);
+    this.ctx.fillStyle = "#00aad4";
+    this.ellipse(this.ctx, this.r * 0.4 - 3, this.r * 0.4 - 3);
+    if (this.franklin)
+      this.ctx.drawImage(this.franklin,
+        this.width/2 - this.r * 0.35, this.height/2 - this.r * 0.35,
+        this.r * 0.7, this.r * 0.7);
   }
 
   drawLoop() {
@@ -91,10 +98,24 @@ export class SpinnerComponent implements OnInit {
     if (this.speed > 0) {
       this.speed -= this.speed * 0.01 * (Math.random() * 0.3 + 0.7) + 0.0003;
       this.offset += this.speed;
-      window.requestAnimationFrame(this.drawLoop.bind(this));
+      if (this.offset > 2 * Math.PI) {
+        this.offset -= 2 * Math.PI;
+      }
     } else {
+      if (this.drawing) {
+        for (let i = 0; i < this.options.length; i++) {
+          let lo = this.offset + this.arc * i;
+          let hi = this.offset + this.arc * (i + 1);
+          if ((lo < 2 * Math.PI && hi > 2 * Math.PI)
+          || (lo < 4 * Math.PI && hi > 4 * Math.PI)) {
+            this.winner = this.options[i];
+            break;
+          }
+        }
+      }
       this.drawing = false;
     }
+    window.requestAnimationFrame(this.drawLoop.bind(this));
   }
 
   ngOnInit() {
@@ -114,18 +135,26 @@ export class SpinnerComponent implements OnInit {
       this.colors.push('hsl(' + Math.floor(i / this.options.length * 360) + ', 100%, 70%)');
     }
 
-    function imageSetter(array, i, img) {
+    function imageSetter(parent, array, i, img) {
       return function() {
         array[i] = img;
-        console.log(array);
+        parent.drawOnce();
       }
     }
 
     for (let i = 0; i < this.options.length; i++) {
       var img = new Image();
-      img.onload = imageSetter(this.images, i, img);
+      img.onload = imageSetter(this, this.images, i, img);
       img.src = this.options[i];
     }
+
+    var img = new Image();
+    img.onload = (function(parent) {
+      return function() {
+        parent.franklin = img;
+      }
+    })(this);
+    img.src = '../../assets/icon-franklil.png';
 
     this.drawLoop();
   }
