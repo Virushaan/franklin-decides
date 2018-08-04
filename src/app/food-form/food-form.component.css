@@ -1,3 +1,20 @@
 .food-form {
-  width: 400px
+  width: 600px;
+  margin: 0 auto;
+  background-color: #AAEEFF;
+  padding: 0;
+}
+
+.franklin-btn {
+  width: 200px;
+  height: auto;
+}
+
+.form-input-fields {
+  background-color: white;
+}
+
+
+mat-form-field {
+  display: block;
 }
