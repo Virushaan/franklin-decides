@@ -21,6 +21,7 @@ export class SpinnerComponent implements OnInit {
   r;
   drawing;
   winner;
+  started;
   franklin_body = null;
   franklin_eyes = null;
   franklin_dizzy = null;
@@ -38,6 +39,7 @@ export class SpinnerComponent implements OnInit {
   }
 
   spinMe() {
+    this.started = true;
     this.speed = Math.random() * 0.85 + 0.4;
     this.drawing = true;
     this.winner = -1;
@@ -150,6 +152,9 @@ export class SpinnerComponent implements OnInit {
           }
         } else {
           if (this.franklin_eyes) {
+            if (!this.started) {
+              radius = 0;
+            }
             this.ctx.drawImage(this.franklin_eyes,
               this.width/2 - this.r * scale2 + radius * Math.cos(this.offset), // x
               this.height/2 - this.r * scale2 + radius * Math.sin(this.offset), // y
@@ -187,6 +192,7 @@ export class SpinnerComponent implements OnInit {
   ngOnInit() {
 
     this.winner = -1;
+    this.started = false;
 
     this.drawing = false;
 
