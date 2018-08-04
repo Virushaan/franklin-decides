@@ -9,3 +9,13 @@
 	</div>
 	<p *ngSwitchDefault>Ended up somewhere bad?</p>
 </div>
+
+<ul *ngFor="let item of result">
+  <mat-card class="location-card">{{item.name}}
+    <button class="die-button" mat-input>
+      <img class="die-light" src="../assets/die-light.png" alt="">
+    </button>
+
+  </mat-card>
+</ul>
+
