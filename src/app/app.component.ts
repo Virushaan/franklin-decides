@@ -14,6 +14,7 @@ export class AppComponent implements OnInit{
   title = 'app';
   public loading = false;
   public formUnsubmitted = true;
+  public page = 'landing';
   result = {};
 
   async nameEventHander($event: any) {
@@ -195,5 +196,14 @@ export class AppComponent implements OnInit{
     }
   }
   ngOnInit() {
+
+  }
+  startEventHandler() {
+    this.page = 'spinner';
+    // todo: request stuff from server
+  }
+
+  spinCompleteHandler() {
+    // ...
   }
 }

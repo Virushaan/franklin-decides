@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -15,14 +16,16 @@ import { FoodFormComponent } from './food-form/food-form.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SpinnerComponent } from './spinner/spinner.component';
-import { HttpClientModule } from '@angular/common/http';
+import { ApiTestComponent } from './api-test/api-test.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoadingComponent,
     FoodFormComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ApiTestComponent
   ],
   imports: [
     BrowserModule,
