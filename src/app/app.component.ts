@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import {LocationServiceService} from './services/location-service.service'
 import { HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit{
 
-  constructor(private locationService:LocationServiceService, private http: HttpClient) { }
+  constructor(private locationService:LocationServiceService, private http: HttpClient,
+  public sanitizer: DomSanitizer) { }
   public userName = '';
 
   options = ["../assets/icon-knife.png", "../assets/icon-spoon.png",

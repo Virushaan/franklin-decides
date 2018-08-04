@@ -11,6 +11,10 @@
     <div class="final-page" *ngIf="result.length >= 6">
       <mat-card>
         <mat-card-title>{{ result[winner].name }}</mat-card-title>
+        <mat-card-content>{{ result[winner].address }}</mat-card-content>
+        <mat-card-content>{{ result[winner].phone_number }}</mat-card-content>
+        <mat-card-content><a href="{{result[winner].website}}">{{result[winner].website}}</a> </mat-card-content>
+        <mat-card-content><a href="{{result[winner].google_maps_url}}">Google maps</a> </mat-card-content>
       </mat-card>
     </div>
   </div>
