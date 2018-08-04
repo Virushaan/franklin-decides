@@ -20,8 +20,11 @@ export class SpinnerComponent implements OnInit {
   r;
   drawing;
   winner;
-  franklin = null;
-  happy_franklin = null;
+  franklin_body = null;
+  franklin_eyes = null;
+  franklin_dizzy = null;
+  franklin_happy = null;
+
   ctx: CanvasRenderingContext2D;
 
   @ViewChild('canvas') canvas: ElementRef;
@@ -53,22 +56,32 @@ export class SpinnerComponent implements OnInit {
     ctx.fill();
   }
 
-  drawSector(i) {
+  drawSector(i, offset) {
     this.sector(this.ctx, this.r-5, this.r-5,
-      this.offset + i * this.arc, this.offset + (i + 1) * this.arc);
-    let angle = this.offset + (i + 1/2) * this.arc;
+      i * this.arc, (i + 1) * this.arc);
+    let angle = (i + 1/2) * this.arc;
+    let scaler = this.arc
+      - Math.min(Math.abs(angle - (offset + 2 * Math.PI)),
+                 Math.abs(angle - offset),
+                 Math.abs(angle - (offset - 2 * Math.PI))) * 0.8;
+    scaler /= this.arc;
+    if (scaler < 0) {
+      scaler = 0;
+    }
     let x = this.width/2 + 0.675 * this.r * Math.cos(angle)
     let y = this.height/2 + 0.675 * this.r * Math.sin(angle);
     this.ctx.fillStyle = "#00aad4";
     this.bubble(this.ctx, x, y, 0.22 * this.r, 0.22 * this.r);
     if (this.images[i]) {
-      if (this.winner == i) {
-        this.ctx.drawImage(this.images[i], x - this.r * 0.25, y - this.r * 0.25,
-          this.r * 0.5, this.r * 0.5);
-      } else {
-        this.ctx.drawImage(this.images[i], x - this.r * 0.22, y - this.r * 0.22,
-          this.r * 0.44, this.r * 0.44);
-      }
+      // if (this.winner == i) {
+      //   let scale = 0.22 + 0.06;
+      //   this.ctx.drawImage(this.images[i], x - this.r * scale, y - this.r * scale,
+      //     this.r * scale * 2, this.r * scale * 2);
+      // } else {
+        let scale = 0.22 + scaler * 0.06;
+        this.ctx.drawImage(this.images[i], x - this.r * scale, y - this.r * scale,
+          this.r * scale * 2, this.r * scale * 2);
+      // }
     }
   }
 
@@ -84,7 +97,7 @@ export class SpinnerComponent implements OnInit {
       this.ctx.fillStyle = (i % 2) ? "#f0f0f0" : "#fff";
       // this.ctx.strokeStyle = "#ccc";
       this.ctx.lineWidth = 2;
-      this.drawSector(i);
+      this.drawSector(i, this.offset);
     }
 
     // White border
@@ -97,9 +110,15 @@ export class SpinnerComponent implements OnInit {
     this.ctx.lineCap = "butt";
     this.ctx.fillStyle = "#00aad4";
     this.ctx.beginPath();
-    this.ctx.moveTo(this.width * 0.46, this.height * 0.67);
-    this.ctx.lineTo(this.width/2, this.height * 0.72);
-    this.ctx.lineTo(this.width * 0.54, this.height * 0.67);
+    let innerRadius = this.r * 0.36;
+    let outerRadius = this.r * 0.5;
+    let angle = this.offset;
+    this.ctx.moveTo(Math.cos(angle - 0.2) * innerRadius + this.width/2,
+                    Math.sin(angle - 0.2) * innerRadius + this.height/2);
+    this.ctx.lineTo(Math.cos(angle) * outerRadius + this.width/2,
+                    Math.sin(angle) * outerRadius + this.height/2);
+    this.ctx.lineTo(Math.cos(angle + 0.2) * innerRadius + this.width/2,
+                    Math.sin(angle + 0.2) * innerRadius + this.height/2);
     this.ctx.stroke();
     this.ctx.fill();
 
@@ -109,15 +128,20 @@ export class SpinnerComponent implements OnInit {
 
     // Draw Franklin
     if (this.winner !== -1) {
-      if (this.happy_franklin)
-        this.ctx.drawImage(this.happy_franklin,
+      if (this.franklin_happy)
+        this.ctx.drawImage(this.franklin_happy,
           this.width/2 - this.r * 0.225, this.height/2 - this.r * 0.225,
           this.r * 0.45, this.r * 0.45);
     } else {
-      if (this.franklin)
-        this.ctx.drawImage(this.franklin,
+      if (this.franklin_body && this.franklin_eyes) {
+        this.ctx.drawImage(this.franklin_body,
           this.width/2 - this.r * 0.22, this.height/2 - this.r * 0.22,
           this.r * 0.44, this.r * 0.44);
+        let radius = this.r * 0.01;
+        this.ctx.drawImage(this.franklin_eyes,
+          this.width/2 - this.r * 0.22, this.height/2 - this.r * 0.22,
+          this.r * 0.44, this.r * 0.44);
+      }
     }
 
   }
@@ -126,25 +150,20 @@ export class SpinnerComponent implements OnInit {
     this.drawOnce();
 
     if (this.speed > 0) {
-      this.speed -= this.speed * 0.01 * (Math.random() * 0.3 + 0.7) + 0.0003;
+      this.speed -= this.speed * 0.009 * (Math.random() * 0.3 + 0.7) + 0.0003;
       this.offset += this.speed;
       if (this.offset > 2 * Math.PI) {
         this.offset -= 2 * Math.PI;
       }
     } else {
       if (this.drawing) {
-        for (let i = 0; i < this.options.length; i++) {
-          let lo = this.offset + this.arc * i;
-          let hi = this.offset + this.arc * (i + 1);
-          if ((lo < 0.5 * Math.PI && hi > 0.5 * Math.PI)
-          || (lo < 2.5 * Math.PI && hi > 2.5 * Math.PI)
-          || (lo < 4.5 * Math.PI && hi > 4.5 * Math.PI)) {
-            this.winner = i;
-            break;
-          }
-        }
+        this.winner = Math.floor(this.offset / this.arc);
       }
-      this.drawing = false;
+      if (this.winner >= 0) {
+        let angle = this.arc * (this.winner + 1/2);
+        this.offset += (angle - this.offset) * 0.1;
+        this.drawing = false;
+      }
     }
     window.requestAnimationFrame(this.drawLoop.bind(this));
   }
@@ -175,20 +194,16 @@ export class SpinnerComponent implements OnInit {
       img.src = this.options[i];
     }
 
-    var img = new Image();
-    img.onload = (function(parent) {
-      return function() {
-        parent.franklin = img;
-      }
-    })(this);
-    img.src = '../../assets/franklil.png';
-    var img2 = new Image();
-    img2.onload = (function(parent) {
-      return function() {
-        parent.happy_franklin = img2;
-      }
-    })(this);
-    img2.src = '../../assets/franklil-happy.png';
+    function loadImage(onload, src) {
+      var img = new Image();
+      img.onload = onload(img);
+      img.src = src;
+    }
+
+    loadImage((function(img) {this.franklin_body = img}).bind(this), '../../assets/franklil-noeyes.png');
+    loadImage((function(img) {this.franklin_eyes = img}).bind(this), '../../assets/franklil-eyes.png');
+    loadImage((function(img) {this.franklin_dizzy = img}).bind(this), '../../assets/franklil-dizzy.png');
+    loadImage((function(img) {this.franklin_happy = img}).bind(this), '../../assets/franklil-happy.png');
 
     this.drawLoop();
   }
