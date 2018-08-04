@@ -21,6 +21,7 @@ export class SpinnerComponent implements OnInit {
   drawing;
   winner;
   franklin = null;
+  happy_franklin = null;
   ctx: CanvasRenderingContext2D;
 
   colors = [];
@@ -37,6 +38,7 @@ export class SpinnerComponent implements OnInit {
   spinMe() {
     this.speed = Math.random() * 0.4 + 0.4;
     this.drawing = true;
+    this.winner = -1;
   }
 
   sector(ctx, width, height, start, end) {
@@ -57,13 +59,18 @@ export class SpinnerComponent implements OnInit {
     this.sector(this.ctx, this.r-5, this.r-5,
       this.offset + i * this.arc, this.offset + (i + 1) * this.arc);
     let angle = this.offset + (i + 1/2) * this.arc;
-    let x = this.width/2 + 0.66 * this.r * Math.cos(angle)
-    let y = this.height/2 + 0.66 * this.r * Math.sin(angle);
+    let x = this.width/2 + 0.675 * this.r * Math.cos(angle)
+    let y = this.height/2 + 0.675 * this.r * Math.sin(angle);
     this.ctx.fillStyle = "#00aad4";
     this.bubble(this.ctx, x, y, 0.22 * this.r, 0.22 * this.r);
     if (this.images[i]) {
-      this.ctx.drawImage(this.images[i], x - this.r * 0.22, y - this.r * 0.22,
-                                         this.r * 0.44, this.r * 0.44);
+      if (this.winner == i) {
+        this.ctx.drawImage(this.images[i], x - this.r * 0.25, y - this.r * 0.25,
+          this.r * 0.5, this.r * 0.5);
+      } else {
+        this.ctx.drawImage(this.images[i], x - this.r * 0.22, y - this.r * 0.22,
+          this.r * 0.44, this.r * 0.44);
+      }
     }
   }
 
@@ -84,12 +91,23 @@ export class SpinnerComponent implements OnInit {
 
     this.ctx.fillStyle = "black";
     this.ellipse(this.ctx, this.r * 0.4, this.r * 0.4);
-    this.ctx.fillStyle = "#00aad4";
+    this.ctx.fillStyle = "white";
     this.ellipse(this.ctx, this.r * 0.4 - 3, this.r * 0.4 - 3);
-    if (this.franklin)
-      this.ctx.drawImage(this.franklin,
-        this.width/2 - this.r * 0.35, this.height/2 - this.r * 0.35,
-        this.r * 0.7, this.r * 0.7);
+    this.ctx.fillStyle = "#00aad4";
+    this.ellipse(this.ctx, this.r * 0.4 - 6, this.r * 0.4 - 6);
+
+    if (this.winner !== -1) {
+      if (this.happy_franklin)
+        this.ctx.drawImage(this.happy_franklin,
+          this.width/2 - this.r * 0.225, this.height/2 - this.r * 0.225,
+          this.r * 0.45, this.r * 0.45);
+    } else {
+      if (this.franklin)
+        this.ctx.drawImage(this.franklin,
+          this.width/2 - this.r * 0.22, this.height/2 - this.r * 0.22,
+          this.r * 0.44, this.r * 0.44);
+    }
+
   }
 
   drawLoop() {
@@ -106,9 +124,9 @@ export class SpinnerComponent implements OnInit {
         for (let i = 0; i < this.options.length; i++) {
           let lo = this.offset + this.arc * i;
           let hi = this.offset + this.arc * (i + 1);
-          if ((lo < 2 * Math.PI && hi > 2 * Math.PI)
-          || (lo < 4 * Math.PI && hi > 4 * Math.PI)) {
-            this.winner = this.options[i];
+          if ((lo < 2.5 * Math.PI && hi > 2.5 * Math.PI)
+          || (lo < 4.5 * Math.PI && hi > 4.5 * Math.PI)) {
+            this.winner = i;
             break;
           }
         }
@@ -154,7 +172,14 @@ export class SpinnerComponent implements OnInit {
         parent.franklin = img;
       }
     })(this);
-    img.src = '../../assets/icon-franklil.png';
+    img.src = '../../assets/franklil.png';
+    var img2 = new Image();
+    img2.onload = (function(parent) {
+      return function() {
+        parent.happy_franklin = img2;
+      }
+    })(this);
+    img2.src = '../../assets/franklil-happy.png';
 
     this.drawLoop();
   }

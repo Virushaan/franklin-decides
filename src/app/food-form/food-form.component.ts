@@ -10,6 +10,7 @@ import { LocationServiceService } from '../services/location-service.service';
 export class FoodFormComponent implements OnInit {
 
   @Output() nameEvent = new EventEmitter<string>();
+  @Output() startEvent = new EventEmitter<void>();
   userName: string = 'none';
 
   renderForm = false;
@@ -17,7 +18,6 @@ export class FoodFormComponent implements OnInit {
   constructor(private locationService:LocationServiceService) { }
 
   formSubmit() {
-    this.locationService.findMe();
     this.userName = 'loaded'
     this.nameEvent.emit(this.userName);
   }
@@ -32,6 +32,11 @@ export class FoodFormComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  start() {
+    console.log('???');
+    this.startEvent.emit();
   }
 
 }

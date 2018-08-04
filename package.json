@@ -25,6 +25,8 @@
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
+    "request-promise": "^4.2.2",
+    "request-promise-native": "^1.0.5",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },
