@@ -17,5 +17,5 @@
           animation: bouncing 0.8s infinite alternate;
           animation-timing-function: ease-out;
   width: 40px;
-  letter-spacing: 20px;
+  margin: 5px;
 }
