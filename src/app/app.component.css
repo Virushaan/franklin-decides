@@ -46,3 +46,41 @@ body {
 .final-page {
   text-align: center;
 }
+
+.fill {
+  width: 100vw;
+  /* height: 100vh; */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding-top: 35px;
+}
+
+.center {
+  /*display: flex;*/
+  /*align-content: center;*/
+  justify-content: center;
+  /*flex-direction: column;*/
+  text-align: center;
+}
+
+.toleft {
+  position: relative;
+  left: -30px;
+}
+
+.toright {
+  position: relative;
+  left: 30px;
+}
+
+h1 {
+  font-size: 3em;
+  font-weight: bold;
+  font-family: 'Bad Script', cursive;
+  transform: rotate(-5deg);
+  line-height: 100%;
+  margin: 0px;
+}
