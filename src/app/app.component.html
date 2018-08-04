@@ -10,7 +10,7 @@
 	<p *ngSwitchDefault>Ended up somewhere bad?</p>
 </div>
 
-<div *ngIf="result.length >= 6">
+<div *ngIf="result.length >= 6 && page == 'spinner'">
   <div *ngFor="let i of createRange(6)" class="location-card">
       <img class="shape-icon" src="{{ options[i] }}" alt="">
       <button *ngIf="!rerolled" class="die-button" mat-button>
