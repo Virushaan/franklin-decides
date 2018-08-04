@@ -9,6 +9,7 @@ const app = express();
 app.use(express.static(__dirname + "/dist/franklin-decides"));
 
 app.use(function(req, res, next) {
+	console.log(req.get('X-Forwarded-Proto'))
   if(req.get('X-Forwarded-Proto') === 'http') {
     return res.redirect('https://franklin-decides.herokuapp.com');
   }
