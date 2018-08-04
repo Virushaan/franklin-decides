@@ -6,7 +6,14 @@
 	<app-loading class="loading-animation" *ngSwitchCase="'loading'"></app-loading>
 	<div *ngSwitchCase="'spinner'">
 		<app-spinner (winnerEvent)="startWinHandler($event)"></app-spinner>
-	</div>
+  </div>
+  <div *ngSwitchCase="'final'">
+    <div class="final-page" *ngIf="result.length >= 6">
+      <mat-card>
+        <mat-card-title>{{ result[winner].name }}</mat-card-title>
+      </mat-card>
+    </div>
+  </div>
 	<p *ngSwitchDefault>Ended up somewhere bad?</p>
 </div>
 

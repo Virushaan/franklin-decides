@@ -27,7 +27,7 @@ export class AppComponent implements OnInit{
   public page = 'landing';
   result: Array<any> = [];
   fullResult: Array<any> = [];
-
+  winner;
   async nameEventHander($event: any) {
 
 
@@ -44,6 +44,8 @@ export class AppComponent implements OnInit{
 
   startWinHandler($event) {
     console.log($event)
+    this.page = "final";
+    this.winner = $event;
   }
 
   async startEventHandler() {
