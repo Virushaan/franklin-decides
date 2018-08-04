@@ -30,6 +30,27 @@ export class AppComponent implements OnInit{
   result: Array<any> = [];
   fullResult: Array<any> = [];
   winner;
+
+  current_franklin = 0;
+
+  different_franklins = ["../../assets/franklin-happy.png",
+  "../../assets/franklin-angry.png",
+  "../../assets/franklin-dizzy.png",
+  "../../assets/franklin-kid.png",
+  "../../assets/franklin-rgb.png",
+  "../../assets/franklin-sad.png",
+  "../../assets/franklin-sleepy.png",
+  "../../assets/franklin-watermelon.png",
+]
+
+  nextFranklin() {
+    if (this.current_franklin == this.different_franklins.length-1){
+      this.current_franklin = 0
+    } else {
+      this.current_franklin += 1
+    }
+  }
+
   async nameEventHander($event: any) {
 
 

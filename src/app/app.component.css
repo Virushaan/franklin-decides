@@ -12,6 +12,8 @@ body {
 
 .shape-icon {
   width: 20px;
+  padding-left: 5px;
+  padding-right: 10px;
 }
 
 .grayed-out {
@@ -37,6 +39,9 @@ body {
   float: right;
   position: relative;
   top: -8px;
+  min-width: 1%;
+  margin-right: -5px;
+  /* max-width: 5px !important; */
 }
 
 .franklin-btn {
@@ -100,4 +105,13 @@ h1 {
   transform: rotate(-5deg);
   line-height: 100%;
   margin: 0px;
+}
+
+.restaurant-name {
+  position: absolute;
+  margin-top: 2px;
+}
+
+.final-franklin {
+  height: 260px;
 }
