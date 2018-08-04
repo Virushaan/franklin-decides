@@ -22,10 +22,11 @@ export class AppComponent implements OnInit{
     }
     return items;
   }
-
+  rerolled = false;
   title = 'app';
   public page = 'landing';
   result: Array<any> = [];
+  fullResult: Array<any> = [];
 
   async nameEventHander($event: any) {
 
@@ -36,13 +37,19 @@ export class AppComponent implements OnInit{
     this.locationService.findMe();
   }
 
+  reroll(i) {
+    this.rerolled = true;
+    this.result[i] = this.fullResult[6]
+  }
+
   async startEventHandler() {
     console.log("TEST")
     await this.locationService.findMe();
     let mylocation = await this.locationService.getLocation();
     console.log('location:', mylocation);
     this.page = 'loading';
-    this.result = await this.http.get<Array<any>>(`https://franklin-decides-api.herokuapp.com/get_location?longitude=${mylocation.coords.longitude}&latitude=${mylocation.coords.latitude}`).toPromise()
+
+    this.fullResult = await this.http.get<Array<any>>(`https://franklin-decides-api.herokuapp.com/get_location?longitude=${mylocation.coords.longitude}&latitude=${mylocation.coords.latitude}`).toPromise()
       .catch(err => {
         this.page='spinner';
         console.log('caught');
@@ -210,8 +217,7 @@ export class AppComponent implements OnInit{
       ]);
       });;
       this.page='spinner';
-      console.log(this.result.splice(0,6));
-      this.result = this.result.splice(0,6);
+      this.result = this.fullResult.splice(0,6);
       // this.result = this.result.splice(0,7)
       this.page = 'spinner';
   }
