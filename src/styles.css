@@ -4,3 +4,11 @@
 body {
   background-color: #F8F8F8;
 }
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: rgb(54, 208, 247) !important;
+}
+
+.mat-ripple-element {
+  background: rgb(170,238,255,0.4) !important;
+}
