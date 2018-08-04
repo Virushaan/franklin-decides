@@ -26,6 +26,11 @@
 }
 
 .wrapper {
+  position:absolute;
+  top: 37%;
+  bottom:45%;
+  left: 0%;
+  right: 0%;
   text-align: center;
 }
 

@@ -32,3 +32,7 @@ body {
   position: relative;
   top: -8px;
 }
+
+.loading-animation {
+  background-color: black;
+}

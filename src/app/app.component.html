@@ -3,7 +3,7 @@
 		*ngSwitchCase="'landing'"
 		(startEvent)="startEventHandler($event)">
 	</app-food-form>
-	<app-loading *ngSwitchCase="'loading'"></app-loading>
+	<app-loading class="loading-animation" *ngSwitchCase="'loading'"></app-loading>
 	<div *ngSwitchCase="'spinner'">
 		<app-spinner></app-spinner>
 	</div>
