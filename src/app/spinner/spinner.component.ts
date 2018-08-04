@@ -15,6 +15,7 @@ export class SpinnerComponent implements OnInit {
   width;
   height;
   offset;
+  jumpno;
   speed;
   arc;
   r;
@@ -123,10 +124,15 @@ export class SpinnerComponent implements OnInit {
     // Draw Franklin
     let scale = 0.22;
     if (this.winner !== -1) {
-      if (this.franklin_happy)
+      if (this.franklin_happy) {
+        let height = this.jumpno * (20 - this.jumpno) / 14;
+        if (height < 0) {
+          height = 0;
+        }
         this.ctx.drawImage(this.franklin_happy,
-          this.width/2 - this.r * scale, this.height/2 - this.r * scale,
+          this.width/2 - this.r * scale, this.height/2 - this.r * scale - height,
           this.r * scale * 2, this.r * scale * 2);
+      }
     } else {
       else {
         if (this.franklin_body) {
@@ -160,7 +166,7 @@ export class SpinnerComponent implements OnInit {
     this.drawOnce();
 
     if (this.speed > 0) {
-      this.speed -= this.speed * 0.008 * (Math.random() * 0.3 + 0.7) + 0.0004;
+      this.speed -= this.speed * 0.012 * (Math.random() * 0.3 + 0.7) + 0.0004;
       this.offset += this.speed;
       if (this.offset > 2 * Math.PI) {
         this.offset -= 2 * Math.PI;
@@ -168,11 +174,13 @@ export class SpinnerComponent implements OnInit {
     } else {
       if (this.drawing) {
         this.winner = Math.floor(this.offset / this.arc);
+        this.jumpno = 0;
       }
       if (this.winner >= 0) {
         let angle = this.arc * (this.winner + 1/2);
         this.offset += (angle - this.offset) * 0.1;
         this.drawing = false;
+        this.jumpno += 1;
       }
     }
     window.requestAnimationFrame(this.drawLoop.bind(this));
