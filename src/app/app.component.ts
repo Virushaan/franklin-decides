@@ -9,10 +9,6 @@ import {LocationServiceService} from './services/location-service.service'
 export class AppComponent  {
   title = 'app';
 
-  constructor(private locationService:LocationServiceService) { }
 
-  getLocation() {
-    this.locationService.findMe();
-  }
 
 }
