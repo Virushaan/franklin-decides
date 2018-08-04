@@ -19,17 +19,18 @@ export class AppComponent implements OnInit{
 
 
   }
-  
+
   ngOnInit() {
     this.locationService.findMe();
   }
 
   async startEventHandler() {
+    console.log("TEST")
+    this.locationService.findMe();
     let mylocation = this.locationService.getLocation();
     console.log('location:', mylocation);
-    if (mylocation === null) {
+    if (!mylocation || !mylocation.longitude) {
       this.locationService.findMe();
-      return;
     }
     this.page = 'loading';
     this.result = await this.http.get<Array<any>>(`http://127.0.0.1:8080/get_location?longitude=${mylocation.longitude}&latitude=${mylocation.latitude}`).toPromise()
@@ -199,7 +200,7 @@ export class AppComponent implements OnInit{
           }
       ]);
       });;
-
+      this.page='spinner';
       console.log(this.result.splice(0,6));
       this.result = this.result.splice(0,6);
       // this.result = this.result.splice(0,7)
