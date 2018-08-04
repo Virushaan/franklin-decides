@@ -12,27 +12,29 @@ export class AppComponent implements OnInit{
   public userName = '';
 
   title = 'app';
-  public loading = false;
-  public formUnsubmitted = true;
   public page = 'landing';
-  result: Array<any>;
+  result: Array<any> = [];
 
   async nameEventHander($event: any) {
 
 
   }
+  
   ngOnInit() {
-
+    this.locationService.findMe();
   }
-  async startEventHandler() {
-    this.page = 'loading';
 
-    console.log("test")
-      this.loading = true;
-      this.formUnsubmitted = false;
-      // this.result = this.locationService.findMe();
-      this.result = await this.http.get<Array<any>>("http://127.0.0.1:8080/get_location?longitude=151.1949701&latitude=-33.881926").toPromise()
+  async startEventHandler() {
+    let mylocation = this.locationService.getLocation();
+    console.log('location:', mylocation);
+    if (mylocation === null) {
+      this.locationService.findMe();
+      return;
+    }
+    this.page = 'loading';
+    this.result = await this.http.get<Array<any>>(`http://127.0.0.1:8080/get_location?longitude=${mylocation.longitude}&latitude=${mylocation.latitude}`).toPromise()
       .catch(err => {
+        this.page='spinner';
         console.log('caught');
         return ([
           {
@@ -197,14 +199,11 @@ export class AppComponent implements OnInit{
           }
       ]);
       });;
+
       console.log(this.result.splice(0,6));
       this.result = this.result.splice(0,6);
       // this.result = this.result.splice(0,7)
       this.page = 'spinner';
-      console.log(this.locationService.findMe());
-      console.log(this.result);
-
-    // todo: request stuff from server
   }
 
   spinCompleteHandler() {

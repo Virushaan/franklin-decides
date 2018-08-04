@@ -37,9 +37,19 @@
 -->
 
 <div class="fill">
-  <div>
-    <img class="franklin-btn" (click)="formSubmit()" src="../../assets/franklin.svg">
+  <div class="inner">
+    <div class="center toleft">
+      <h1>Franklin</h1>
+    </div>
+    <div class="center toright">
+      <h1>Decides!</h1>
+    </div>
+    <div class="center">
+      <img class="franklin franklin-btn" (click)="formSubmit()" src="../../assets/franklin.svg">
+    </div>
     <br>
-   <button (click)="start()">Start!</button>      
+    <div class="center">
+     <button mat-button (click)="start()">Find food</button>     
+   </div>
   </div>
 </div>
