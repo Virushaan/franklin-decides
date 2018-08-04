@@ -19,6 +19,7 @@ export class SpinnerComponent implements OnInit {
   speed;
   arc;
   r;
+  drawing;
   ctx: CanvasRenderingContext2D;
 
   colors = [];
@@ -34,6 +35,8 @@ export class SpinnerComponent implements OnInit {
 
   spinMe() {
     this.speed = Math.random() * 0.4 + 0.4;
+    this.drawLoop();
+    this.drawing = true;
   }
 
   sector(ctx, width, height, start, end) {
@@ -64,7 +67,7 @@ export class SpinnerComponent implements OnInit {
     }
   }
 
-  drawLoop() {
+  drawOnce() {
     this.ctx.clearRect(0, 0, this.width, this.height);
 
     this.ctx.fillStyle = "black";
@@ -77,19 +80,26 @@ export class SpinnerComponent implements OnInit {
       this.ctx.fillStyle = "white";
       // this.ctx.strokeStyle = this.colors[i];
       this.ctx.strokeStyle = "#ccc";
-      this.ctx.lineWidth = "2";
+      this.ctx.lineWidth = 2;
       this.drawSector(i);
     }
+  }
+
+  drawLoop() {
+    this.drawOnce();
 
     if (this.speed > 0) {
       this.speed -= this.speed * 0.01 * (Math.random() * 0.3 + 0.7) + 0.0003;
       this.offset += this.speed;
+      window.requestAnimationFrame(this.drawLoop.bind(this));
+    } else {
+      this.drawing = false;
     }
-
-    window.requestAnimationFrame(this.drawLoop.bind(this));
   }
 
   ngOnInit() {
+
+    this.drawing = false;
 
     this.width = this.canvas.nativeElement.width;
     this.height = this.canvas.nativeElement.height;
