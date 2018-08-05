@@ -36,11 +36,8 @@ export class AppComponent implements OnInit{
   different_franklins = ["../../assets/franklin-happy.png",
   "../../assets/franklin-angry.png",
   "../../assets/franklin-dizzy.png",
-  "../../assets/franklin-kid.png",
-  "../../assets/franklin-rgb.png",
   "../../assets/franklin-sad.png",
-  "../../assets/franklin-sleepy.png",
-  "../../assets/franklin-watermelon.png",
+  "../../assets/franklin-sleepy.png"
 ]
 
   nextFranklin() {
