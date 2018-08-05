@@ -120,7 +120,13 @@ h1 {
   background-color: #8dd8eb !important;
 }
 
-.final-info-card {
-  box-shadow: none;
+.final-info-card-title {
+  box-shadow: none !important;
   margin-top: -140px;
+  background-color:#00aad4;
+}
+
+.final-info-card-content {
+  box-shadow: none !important;
+  /* margin-top: -20px; */
 }

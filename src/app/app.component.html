@@ -23,8 +23,10 @@
               <br>
             </div>
           </div>
-      <mat-card class="final-info-card">
-        <mat-card-title>{{ result[winner].name }}</mat-card-title>
+      <mat-card class="final-info-card-title">
+        <mat-card-title style="color:white;">{{ result[winner].name }}</mat-card-title>
+      </mat-card>
+      <mat-card class="final-info-card-content">
         <mat-card-content>{{ result[winner].address }}</mat-card-content>
         <mat-card-content>{{ result[winner].phone_number }}</mat-card-content>
         <mat-card-content><a href="{{result[winner].website}}">{{result[winner].website}}</a> </mat-card-content>
