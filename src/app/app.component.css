@@ -22,6 +22,10 @@ body {
   opacity: 0.3;
 }
 
+.location-card {
+  transition: background-color 0.1s;
+}
+
 .location-card:nth-child(even) {
   background-color: white;
 }
