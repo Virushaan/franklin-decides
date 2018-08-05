@@ -114,6 +114,7 @@ h1 {
 .restaurant-name {
   position: absolute;
   margin-top: 2px;
+  font-family: sans-serif;
 }
 
 .final-franklin {
@@ -126,11 +127,17 @@ h1 {
 
 .final-info-card-title {
   box-shadow: none !important;
-  margin-top: -140px;
+  /* margin-top: -140px; */
   background-color:#00aad4;
 }
 
 .final-info-card-content {
   box-shadow: none !important;
   /* margin-top: -20px; */
+}
+
+.bottom-card {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
