@@ -30,7 +30,7 @@ export class AppComponent implements OnInit{
   result: Array<any> = [];
   fullResult: Array<any> = [];
   winner;
-
+  currentPos;
   current_franklin = 0;
 
   different_franklins = ["../../assets/franklin-happy.png",
@@ -69,6 +69,10 @@ export class AppComponent implements OnInit{
     console.log($event)
     this.page = "final";
     this.winner = $event;
+  }
+
+  listenCurrentHandler($event) {
+    this.currentPos = $event;
   }
 
   async startEventHandler() {

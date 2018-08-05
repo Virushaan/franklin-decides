@@ -115,3 +115,12 @@ h1 {
 .final-franklin {
   height: 260px;
 }
+
+.highlighted {
+  background-color: #8dd8eb !important;
+}
+
+.final-info-card {
+  box-shadow: none;
+  margin-top: -140px;
+}

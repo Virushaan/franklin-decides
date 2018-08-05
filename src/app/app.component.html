@@ -5,7 +5,7 @@
 	</app-food-form>
 	<app-loading class="loading-animation" *ngSwitchCase="'loading'"></app-loading>
 	<div *ngSwitchCase="'spinner'">
-		<app-spinner (winnerEvent)="startWinHandler($event)"></app-spinner>
+		<app-spinner (currentPosEvent)="listenCurrentHandler($event)" (winnerEvent)="startWinHandler($event)"></app-spinner>
   </div>
   <div *ngSwitchCase="'final'">
     <div class="final-page" *ngIf="result.length >= 6">
@@ -23,7 +23,7 @@
               <br>
             </div>
           </div>
-      <mat-card>
+      <mat-card class="final-info-card">
         <mat-card-title>{{ result[winner].name }}</mat-card-title>
         <mat-card-content>{{ result[winner].address }}</mat-card-content>
         <mat-card-content>{{ result[winner].phone_number }}</mat-card-content>
@@ -36,16 +36,17 @@
 </div>
 
 <div *ngIf="result.length >= 6 && page == 'spinner'">
-  <div *ngFor="let i of createRange(6)" class="location-card">
-      <img class="shape-icon" src="{{ options[i] }}" alt="">
-      <button *ngIf="!rerolled" class="die-button mat-small" mat-button>
-        <img class="die-light" (click)="reroll(i)" src="../assets/die-light.png" alt="">
-      </button>
-      <button *ngIf="rerolled" class="die-button" mat-button>
-        <img class="die-light grayed-out"src="../assets/die-light.png" alt="">
-      </button>
-      <span class="restaurant-name">{{ result[i].name }}</span>
-
+  <div [class.highlighted]="i == currentPos" *ngFor="let i of createRange(6)" class="location-card">
+        <img class="shape-icon" src="{{ options[i] }}" alt="">
+        <button *ngIf="!rerolled" class="die-button mat-small" mat-button>
+          <img class="die-light" (click)="reroll(i)" src="../assets/die-light.png" alt="">
+        </button>
+        <button *ngIf="rerolled" class="die-button" mat-button>
+          <img class="die-light grayed-out"src="../assets/die-light.png" alt="">
+        </button>
+        <span class="restaurant-name">{{ result[i].name }}</span>
     </div>
+
+
 
 </div>

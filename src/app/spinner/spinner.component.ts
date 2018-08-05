@@ -13,6 +13,7 @@ export class SpinnerComponent implements OnInit {
   images = [null, null, null, null, null, null];
 
   @Output() winnerEvent = new EventEmitter<number>();
+  @Output() currentPosEvent = new EventEmitter<number>()
 
   width;
   height;
@@ -183,9 +184,12 @@ export class SpinnerComponent implements OnInit {
     if (this.speed > 0) {
       this.speed -= this.speed * 0.012 * (Math.random() * 0.3 + 0.7) + 0.0004;
       this.offset += this.speed;
+
       if (this.offset > 2 * Math.PI) {
         this.offset -= 2 * Math.PI;
       }
+      let current_pos = Math.floor(this.offset / this.arc);
+      this.currentPosEvent.emit(current_pos);
     } else {
       if (this.drawing) {
         this.winner = Math.floor(this.offset / this.arc);
