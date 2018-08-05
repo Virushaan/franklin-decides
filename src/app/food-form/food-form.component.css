@@ -6,6 +6,12 @@
   100% { top: -55px; transform: scaleY(1.0) scaleX(1.0); }
 }
 
+.arrow {
+    position: relative;
+    top: -10px;
+    width: 160px;
+}
+
 .food-form {
   width: 240px;
   margin: auto;
