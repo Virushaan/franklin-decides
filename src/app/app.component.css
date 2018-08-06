@@ -65,6 +65,24 @@ body {
           animation-timing-function: ease-out;
 }
 
+@keyframes final-bounce {
+  0%   { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
+  45%  { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
+  60%  { top: 18px; transform: scaleY(0.85) scaleX(1.10); }
+  70%  { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
+  100% { top: -55px; transform: scaleY(1.0) scaleX(1.0); }
+}
+
+
+.franklin-final {
+  height: 260px;
+  position: relative;
+  -webkit-animation: final-bounce 10s infinite alternate;
+  -webkit-animation-timing-function: ease-out;
+          animation: final-bounce 10s infinite alternate;
+          animation-timing-function: ease-out;
+}
+
 .loading-animation {
   background-color: black;
 }
@@ -115,10 +133,6 @@ h1 {
   position: absolute;
   margin-top: 2px;
   font-family: sans-serif;
-}
-
-.final-franklin {
-  height: 260px;
 }
 
 .highlighted {
