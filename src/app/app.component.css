@@ -83,6 +83,32 @@ body {
           animation-timing-function: ease-out;
 }
 
+@keyframes fading {
+    0%   { opacity: 0.2; transform: scaleY(1.0) scaleX(1.0); }
+    45%  { opacity: 0.2; transform: scaleY(1.0) scaleX(1.0); }
+    60%  { opacity: 0.22; transform: scaleY(1.05) scaleX(1.05); }
+    70%  { opacity: 0.2; transform: scaleY(1.0) scaleX(1.0); }
+    100% { opacity: 0.15; transform: scaleY(0.7) scaleX(0.7); }
+}
+
+.shadow {
+    background-color: #aaaaaa;
+    opacity: 0.5;
+    position: relative;
+    top: -42px;
+    left: 28px;
+    border-radius: 50%;
+    z-index: -2;
+    height: 30px;
+    width: 180px;
+    -webkit-animation: fading 1s infinite alternate;
+    -webkit-animation-timing-function: ease-out;
+            animation: fading 1s infinite alternate;
+            animation-timing-function: ease-out;
+}
+
+
+
 .loading-animation {
   background-color: black;
 }
