@@ -77,9 +77,9 @@ body {
 .franklin-final {
   height: 260px;
   position: relative;
-  -webkit-animation: final-bounce 10s infinite alternate;
+  -webkit-animation: final-bounce 1s infinite alternate;
   -webkit-animation-timing-function: ease-out;
-          animation: final-bounce 10s infinite alternate;
+          animation: final-bounce 1s infinite alternate;
           animation-timing-function: ease-out;
 }
 
