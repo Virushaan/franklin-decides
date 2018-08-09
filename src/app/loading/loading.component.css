@@ -1,7 +1,7 @@
 @keyframes bouncing {
   0%   { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
   30%  { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
-  44%  { top: 35px; transform: scaleY(0.85) scaleX(1.15); }
+  44%  { top: 33px; transform: scaleY(0.85) scaleX(1.15); }
   50%  { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
   100% { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
 }
@@ -9,7 +9,7 @@
 @-webkit-keyframes bouncing {
   0%   { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
   30%  { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
-  44%  { top: 35px; transform: scaleY(0.85) scaleX(1.15); }
+  44%  { top: 33px; transform: scaleY(0.85) scaleX(1.15); }
   50%  { top: 30px; transform: scaleY(1.0) scaleX(1.0); }
   100% { top: 0px; transform: scaleY(1.0) scaleX(1.0); }
 }
@@ -39,4 +39,35 @@
   height: 78px;
   padding: 5px;
   margin: 0 auto;
+}
+
+@keyframes fading {
+  0%   { opacity: 0.15; transform: scaleY(1.0) scaleX(1.0); }
+  30%  { opacity: 0.15; transform: scaleY(1.0) scaleX(1.0); }
+  44%  { opacity: 0.17; transform: scaleY(1.05) scaleX(1.05); }
+  50%  { opacity: 0.15; transform: scaleY(1.0) scaleX(1.0); }
+  100% { opacity: 0.12; transform: scaleY(0.8) scaleX(0.8); }
+}
+
+.shadow {
+  background-color: #aaaaaa;
+  opacity: 0.2;
+  position: relative;
+  top: 16px;
+  left: 8px;
+  border-radius: 50%;
+  z-index: -2;
+  height: 6px;
+  width: 34px;
+  -webkit-animation: fading 0.55s infinite alternate;
+  -webkit-animation-timing-function: ease-out;
+          animation: fading 0.55s infinite alternate;
+          animation-timing-function: ease-out;
+}
+
+.icon-block {
+  width: 45px;
+  height: 45px;
+  display: inline-block;
+  margin: 5px;
 }
