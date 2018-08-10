@@ -77,11 +77,37 @@ body {
 .franklin-final {
   height: 260px;
   position: relative;
-  -webkit-animation: final-bounce 10s infinite alternate;
+  -webkit-animation: final-bounce 1s infinite alternate;
   -webkit-animation-timing-function: ease-out;
-          animation: final-bounce 10s infinite alternate;
+          animation: final-bounce 1s infinite alternate;
           animation-timing-function: ease-out;
 }
+
+@keyframes final-fading {
+    0%   { opacity: 0.2; transform: scaleY(1.0) scaleX(1.0); }
+    45%  { opacity: 0.2; transform: scaleY(1.0) scaleX(1.0); }
+    60%  { opacity: 0.22; transform: scaleY(1.05) scaleX(1.05); }
+    70%  { opacity: 0.2; transform: scaleY(1.0) scaleX(1.0); }
+    100% { opacity: 0.15; transform: scaleY(0.8) scaleX(0.8); }
+}
+
+.final-shadow {
+    background-color: #aaaaaa;
+    opacity: 0.2;
+    position: relative;
+    top: -42px;
+    left: 28px;
+    border-radius: 50%;
+    z-index: -2;
+    height: 30px;
+    width: 180px;
+    -webkit-animation: final-fading 1s infinite alternate;
+    -webkit-animation-timing-function: ease-out;
+            animation: final-fading 1s infinite alternate;
+            animation-timing-function: ease-out;
+}
+
+
 
 .loading-animation {
   background-color: black;
