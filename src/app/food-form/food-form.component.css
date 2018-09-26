@@ -6,10 +6,24 @@
   100% { top: -55px; transform: scaleY(1.0) scaleX(1.0); }
 }
 
+@keyframes bobbing {
+  0%   { top: -60px; }
+  40%  { top: -60px; }
+  45%  { top: -53px; }
+  50%  { top: -60px; }
+  55%  { top: -53px; }
+  60%  { top: -60px; }
+  100% { top: -60px; }
+}
+
 .arrow {
     position: relative;
     top: -60px;
     width: 160px;
+    -webkit-animation: bobbing 5s infinite;
+    -webkit-animation-timing-function: ease;
+            animation: bobbing 5s infinite;
+            animation-timing-function: ease;
 }
 
 .food-form {
