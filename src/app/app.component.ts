@@ -88,7 +88,7 @@ export class AppComponent implements OnInit{
       console.log('Bad location')
     }
     console.log("###", mylocation);
-    this.fullResult = await this.http.get<Array<any>>(`https://franklin-decides-api.herokuapp.com/get_location?longitude=${mylocation.coords.longitude}&latitude=${mylocation.coords.latitude}`).toPromise()
+    this.fullResult = await this.http.get<Array<any>>(`https://franklindecidesbackend.herokuapp.com/get_location?longitude=${mylocation.coords.longitude}&latitude=${mylocation.coords.latitude}`).toPromise()
       .catch(err => {
         this.page='spinner';
         console.log('caught');
