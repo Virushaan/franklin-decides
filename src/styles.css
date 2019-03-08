@@ -16,3 +16,7 @@ body {
 .mat-ripple-element {
   background: rgb(170,238,255,0.4) !important;
 }
+
+body {
+  overflow-x: hidden;
+}

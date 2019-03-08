@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import {LocationServiceService} from './services/location-service.service'
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import { isDevMode } from '@angular/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -88,7 +90,8 @@ export class AppComponent implements OnInit{
       console.log('Bad location')
     }
     console.log("###", mylocation);
-    this.fullResult = await this.http.get<Array<any>>(`https://franklindecidesbackend.herokuapp.com/get_location?longitude=${mylocation.coords.longitude}&latitude=${mylocation.coords.latitude}`).toPromise()
+    const base = isDevMode() ? 'http://localhost:8080' : 'https://franklin-decides-api.herokuapp.com';
+    this.fullResult = await this.http.get<Array<any>>(`${base}/get_location?longitude=${mylocation.coords.longitude}&latitude=${mylocation.coords.latitude}`).toPromise()
       .catch(err => {
         this.page='spinner';
         console.log('caught');
