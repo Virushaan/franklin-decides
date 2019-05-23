@@ -181,3 +181,11 @@ h1 {
   bottom: 0;
   width: 100%;
 }
+
+.spinner-wrapper {
+  margin: 0px auto;
+}
+
+.spinner-wrapper app-spinner {
+  display: flex;
+}
