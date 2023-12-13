@@ -1,6 +1,6 @@
 # FranklinDecides
 
-This was built for the 2018 UniHack hackathon. It provides an service whose adorable mascot will grab 6 restaurants near your location and randomly selects one for you so that indecisive people don't have to make the decision themselves. The project was awarded 2nd place and won best UI. Designed for mobile use only.
+This was built for the 2018 UniHack hackathon. It provides an service whose adorable mascot will grab 6 restaurants near your location and randomly selects one for you so that indecisive people don't have to make the decision themselves. Designed for mobile use only.
 
 https://franklin-decides.herokuapp.com/
 
